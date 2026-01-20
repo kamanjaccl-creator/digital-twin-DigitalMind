@@ -25,8 +25,8 @@ These URLs will provide context to AI tools (Copilot, Claude, GPT agents) so the
 
 ## 3. Technical Requirements
 Technology stack and security tools the portfolio will use.
-  - Frontend: Next.js 15 (latest stable) with TypeScript  
-  - Backend: Node.js / API routes  
+  - Frontend: Next.js 16 (latest stable) with TypeScript  
+  - Backend: Node.js 20 / API routes  
   - Database: Supabase (latest stable PostgreSQL)  
   - Deployment: Vercel  
   - Authentication: Clerk (Next.js SDK) or OAuth/ Supabase Auth  
@@ -93,6 +93,7 @@ Team repository created: digital-twin-DigitalMind
   - Test WAF configurations in staging
   - Use secure, token-based authentication
   - Capture logs in a structured centralized format
+
 
 
 

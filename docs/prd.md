@@ -29,7 +29,7 @@ Technology stack and security tools the portfolio will use.
   - Backend: Node.js / API routes  
   - Database: Supabase (latest stable PostgreSQL)  
   - Deployment: Vercel  
-  - Authentication: OAuth or Supabase Auth  
+  - Authentication: Clerk (Next.js SDK) or OAuth/ Supabase Auth  
   - Web Application Firewall (WAF): Configured for common exploits  
   - Logging & Monitoring: Real-time access logs + attack telemetry  
   - Secure Headers: CSP, X-Frame-Options, HSTS  
@@ -42,7 +42,9 @@ Technology stack and security tools the portfolio will use.
   - Real-time logs capture potential attack attempts.  
   - Defensive layers block SQL injection, XSS, brute force, and bot traffic.  
   - Security controls are demonstrable via dashboards or reports.
-  - Real-time security dashboard showing login attempts, blocked attacks, and traffic patterns. 
+  - Real-time security dashboard showing login attempts, blocked attacks, and traffic patterns.
+  - Users can securely log in and manage their profile using Clerk authentication
+  - Session and role management handled via Clerk dashboard.
 
 ## 5. Non-Functional Requirements
   
@@ -83,11 +85,14 @@ Team repository created: digital-twin-DigitalMind
   - Incomplete authentication flow exposing endpoints
   - Lack of adequate logging
   - Logging may expose sensitive data if improperly stored.
+  - Misconfigured authentication flow exposing endpoints → mitigated by Clerk’s secure SDK and dashboards.
+
 
 
 ## 9. Mitigations
   - Test WAF configurations in staging
   - Use secure, token-based authentication
   - Capture logs in a structured centralized format
+
 
 

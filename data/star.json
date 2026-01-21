@@ -1,0 +1,122 @@
+{
+  "project": {
+    "name": "Digital Twin III – Cyber-Hardened Portfolio",
+    "owner": "DigitalMind Team",
+    "description": "A cyber-hardened personal portfolio with integrated AI agents, real-time threat detection, security analytics, and automated content management. Demonstrates skills in cybersecurity, AI-assisted development, and secure web deployment.",
+    "repository": "https://github.com/ashmin7/digital-twin-DigitalMind",
+    "techStack": {
+      "frontend": "Next.js 16 + TypeScript",
+      "backend": "Node.js 20",
+      "database": "Supabase (PostgreSQL)",
+      "deployment": "Vercel",
+      "authentication": "Clerk (Next.js SDK) or Supabase Auth",
+      "security": ["WAF", "CSP Headers", "Audit Logs"]
+    },
+    "aiIntegration": ["Copilot", "Claude", "GPT agents"]
+  },
+  "agents": [
+    {
+      "id": "persona-agent",
+      "name": "DigitalTwinPersona",
+      "purpose": "Interactive digital twin representing professional identity.",
+      "capabilities": [
+        "Answer questions about skills, projects, and certifications",
+        "Provide professional guidance and contact info",
+        "Maintain concise, approachable, and informative responses"
+      ]
+    },
+    {
+      "id": "security-agent",
+      "name": "SecurityGuardian",
+      "purpose": "Detects threats and protects the portfolio from malicious inputs.",
+      "capabilities": [
+        "Detect SQL injection, XSS, prompt injections, bot attacks",
+        "Assign severity (LOW, MEDIUM, HIGH, CRITICAL)",
+        "Provide recommended action: ALLOW, BLOCK, CHALLENGE, LOG_ONLY"
+      ]
+    },
+    {
+      "id": "content-agent",
+      "name": "ContentCreator",
+      "purpose": "Generates and manages blog posts and project documentation.",
+      "capabilities": [
+        "Create, update, and summarize content in markdown",
+        "Maintain consistent branding and technical accuracy",
+        "Support MCP tools for automation"
+      ]
+    },
+    {
+      "id": "analytics-agent",
+      "name": "ThreatAnalytics",
+      "purpose": "Aggregates and analyzes security events for actionable insights.",
+      "capabilities": [
+        "Compute threat metrics and trends",
+        "Generate dashboards and reports",
+        "Predict potential future threats"
+      ]
+    },
+    {
+      "id": "audit-agent",
+      "name": "AuditLogger",
+      "purpose": "Logs and monitors all security-related events in structured format.",
+      "capabilities": [
+        "Sanitize sensitive data before logging",
+        "Store events in Supabase",
+        "Send real-time notifications for critical events"
+      ]
+    }
+  ],
+  "dashboard": {
+    "name": "Security Operations Dashboard",
+    "metrics": [
+      "totalEvents",
+      "blockedAttacks",
+      "threatsByType",
+      "threatsBySeverity",
+      "topAttackVectors",
+      "attackFrequency",
+      "currentThreatLevel"
+    ],
+    "refreshInterval": "5 minutes",
+    "alerts": ["CRITICAL", "HIGH"]
+  },
+  "projects": [
+    {
+      "id": "proj-001",
+      "name": "DigitalMind Portfolio Hardening",
+      "description": "Cyber-hardened portfolio with AI agents and real-time security monitoring.",
+      "technologies": ["Next.js 16", "Node.js 20", "Supabase", "Clerk", "Vercel"],
+      "githubUrl": "https://github.com/ashmin7/digital-twin-DigitalMind",
+      "liveUrl": "",
+      "readme": "docs/prd.md"
+    }
+  ],
+  "blogPosts": [
+    {
+      "id": "blog-001",
+      "title": "Securing Your Personal Portfolio with AI Agents",
+      "slug": "securing-portfolio-ai-agents",
+      "excerpt": "Learn how AI agents protect and manage a cyber-hardened portfolio, providing real-time threat detection and analytics.",
+      "tags": ["cybersecurity", "AI", "portfolio"],
+      "publishedAt": "2026-01-21T12:00:00Z",
+      "author": "DigitalMind Team"
+    }
+  ],
+  "team": [
+    {
+      "name": "Ashmin Aryal",
+      "role": "Team Lead / AI & Security Integration",
+      "contributions": ["Persona Agent setup", "Security Guardian rules", "Audit Logger"]
+    },
+    {
+      "name": "Victor Kamanja",
+      "role": "Frontend Developer",
+      "contributions": ["Next.js 16 setup", "Dashboard UI", "Blog interface"]
+    },
+    {
+      "name": "Phuntshok Wangdruk",
+      "role": "Backend Developer",
+      "contributions": ["Supabase integration", "API routes", "Threat Analytics"]
+    }
+  ]
+}

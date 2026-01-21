@@ -105,18 +105,19 @@
   "team": [
     {
       "name": "Ashmin Aryal",
-      "role": "Team Lead / AI & Security Integration",
-      "contributions": ["Persona Agent setup", "Security Guardian rules", "Audit Logger"]
+      "role": "Team Lead / Star File Author",
+      "contributions": ["Created consolidated star.json including metadata, sample content, and agent configurations."]
     },
     {
       "name": "Victor Kamanja",
-      "role": "Frontend Developer",
-      "contributions": ["Next.js 16 setup", "Dashboard UI", "Blog interface"]
+      "role": "Frontend Developer/PRD Author",
+      "contributions": ["Defined project requirements, technical & functional specifications, risk & mitigation strategies."]
     },
     {
       "name": "Phuntshok Wangdruk",
-      "role": "Backend Developer",
-      "contributions": ["Supabase integration", "API routes", "Threat Analytics"]
+      "role": "Backend Developer/Agents Developer",
+      "contributions": ["Developed AI agents including Persona, Security Guardian, Content Creator, Threat Analytics, and Audit Logger."]
     }
   ]
 }
+

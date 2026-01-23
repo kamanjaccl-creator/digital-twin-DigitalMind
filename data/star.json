@@ -122,35 +122,57 @@
 }
 
   "workshop_references": {
-    "week1_topics": [
-      "GitHub collaboration and repository management",
-      "ClickUp AI-human workflow orchestration", 
-      "AI-readable documentation structure",
-      "Team coordination and contribution tracking"
+    "week_number": 1,
+    "week_title": "Project Foundations",
+    "topics_covered": [
+      "GitHub Repository Setup with team collaboration",
+      "ClickUp configuration for AI-human workflow orchestration",
+      "AI-readable documentation structure (agents.md, prd.md, README.md)",
+      "STAR data structure for team intelligence",
+      "Project management with balanced task distribution",
+      "Security-focused project architecture planning"
+    ],
+    "deliverables_completed": [
+      "Public GitHub repository with 3+ collaborators",
+      "ClickUp board with AI-optimized workflow (6 status columns)",
+      "Core documentation files: agents.md, docs/prd.md, data/star.json, README.md",
+      "Minimum 1 commit per team member with meaningful contributions",
+      "PDF evidence of collaboration (screenshots)",
+      "Project structure ready for Week 2 RAG implementation"
     ],
     "ai_study_materials": [
       {
-        "topic": "RAG Systems",
-        "url": "https://arxiv.org/abs/2005.11401",
-        "application": "Document retrieval and generation"
+        "topic": "AI Agent Architecture",
+        "url": "https://arxiv.org/abs/2210.03629",
+        "application": "Planning DigitalTwinPersona, SecurityGuardian, and other agents",
+        "week_relevance": 1
       },
       {
-        "topic": "AI Agent Security",
-        "url": "https://owasp.org/www-project-ai-security-and-privacy-guide/",
-        "application": "Threat detection and mitigation"
+        "topic": "GitHub Collaboration Best Practices",
+        "url": "https://docs.github.com/en/get-started/quickstart",
+        "application": "Setting up team repository with proper permissions",
+        "week_relevance": 1
       },
       {
-        "topic": "Vector Databases",
-        "url": "https://www.pinecone.io/learn/vector-database-comparison/",
-        "application": "Embedding storage and similarity search"
+        "topic": "Project Management for AI Teams",
+        "url": "https://clickup.com/blog/ai-project-management/",
+        "application": "Configuring ClickUp for AI-human task orchestration",
+        "week_relevance": 1
       }
     ],
-    "technical_patterns": {
-      "mcp_integration": "Model Context Protocol for tool integration",
-      "rag_implementation": "Retrieval-Augmented Generation patterns",
-      "security_monitoring": "Real-time threat detection and logging",
-      "agent_orchestration": "Multi-agent coordination and communication"
-    }
+    "technical_patterns_applied": {
+      "documentation_structure": "Hierarchical AI-readable files (agents.md → prd.md → star.json)",
+      "team_collaboration": "Distributed contributions with clear ownership",
+      "security_foundation": "Threat modeling and security-first architecture",
+      "ai_context_management": "Files optimized for Copilot/Claude/ChatGPT parsing"
+    },
+    "week1_learning_outcomes": [
+      "Understanding AI project lifecycle (infrastructure → implementation)",
+      "Creating context files that AI tools can read and use",
+      "Orchestrating tasks between human and AI contributors",
+      "Establishing security posture from project inception",
+      "Building portfolio-ready project artifacts"
+    ]
   },
 
 

@@ -1,4 +1,4 @@
-# Digital Twin III – Agent Architecture
+# Digital Twin III – Agent Architecture (Team 3)
 
 ## Overview
 

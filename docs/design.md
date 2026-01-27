@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-"PR proof commit" 
-"PR proof commit" 
-=======
 # TECHNICAL DESIGN DOCUMENT
 ## Digital Twin III – Cyber-Hardened Portfolio
 ### Version 1.0
@@ -746,4 +742,3 @@ jobs:
 
 ---
 
->>>>>>> origin/main

@@ -112,6 +112,13 @@ npm install openai
 # Security
 npm install @arcjet/next lru-cache
 
+# Monitoring
+npm install @vercel/analytics
+npm install helmet # Additional security headers
+
+# Testing
+npm install -D vitest @testing-library/react @testing-library/jest-dom
+
 # UI
 npm install tailwindcss postcss autoprefixer
 npm install lucide-react
@@ -454,6 +461,15 @@ ARCJET_KEY=your_arcjet_key
 | AI-assisted development evidence | This plan + Copilot usage | All | ⬜ |
 | Real-time security dashboard | SecurityDashboard component | 5 | ⬜ |
 
+### OWASP Top 10 Compliance Matrix
+| Risk | Mitigation | Evidence Location | Verified |
+|------|-----------|-------------------|----------|
+| A01: Broken Access Control | Clerk + RLS | Phase 2.3 | ⬜ |
+| A02: Cryptographic Failures | HTTPS + secure headers | Phase 3.4 | ⬜ |
+| A03: Injection | Input validation | Phase 3.1 | ⬜ |
+| A07: Authentication Failures | Clerk + rate limiting | Phase 2.3, 3.2 | ⬜ |
+| A09: Security Logging | AuditLogger | Phase 4.4 | ⬜ |
+
 ---
 
 ## 5. Risk Mitigation
@@ -491,8 +507,19 @@ ARCJET_KEY=your_arcjet_key
 | All Members | Participate in security testing |
 
 ---
+## 8. Code Review Standards
+Every PR must verify:
+- [ ] No hardcoded secrets (use env vars)
+- [ ] Error handling on all external calls (try/catch)
+- [ ] TypeScript strict mode errors = 0
+- [ ] Security functions have unit tests
+- [ ] Comments explain *why*, not *what*
+- [ ] No `any` types (use `unknown` + type guards)
+- [ ] AI-generated code reviewed and understood
+- [ ] Supabase queries use parameterized statements
 
-## 8. AI-Assisted Development Log
+
+## 9. AI-Assisted Development Log
 
 Document all AI tool usage for PRD compliance:
 
@@ -504,7 +531,7 @@ Document all AI tool usage for PRD compliance:
 
 ---
 
-## 9. Success Metrics
+## 10. Success Metrics
 
 | Metric | Target | Measurement |
 |--------|--------|-------------|
@@ -516,7 +543,7 @@ Document all AI tool usage for PRD compliance:
 
 ---
 
-## 10. References
+## 11. References
 
 - [PRD Document](./prd.md)
 - [Technical Design Document](./design.md)

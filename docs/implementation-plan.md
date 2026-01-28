@@ -312,7 +312,7 @@ ALTER TABLE security_events ENABLE ROW LEVEL SECURITY;
 ### Phase 5: API Routes & Frontend (Days 11-13)
 
 #### 5.1 API Routes
-
+Endpoints will support chat interactions, security data retrieval, metrics visualisation, and export capabilities.
 | Route | Method | Purpose | Auth Required |
 |-------|--------|---------|---------------|
 | /api/chat | POST | Chat with digital twin | No |
@@ -357,7 +357,7 @@ ALTER TABLE security_events ENABLE ROW LEVEL SECURITY;
 ### Phase 6: Testing, Hardening & Deployment (Days 14-15)
 
 #### 6.1 Security Testing
-
+Comprehensive tests will verify resilience against SQLi, XSS, prompt injection, bot traffic, and rate-limit evasion.
 | Test | Description | Owner | Status |
 |------|-------------|-------|--------|
 | 6.1.1 | SQL Injection test cases | Team | ⬜ |
@@ -366,6 +366,12 @@ ALTER TABLE security_events ENABLE ROW LEVEL SECURITY;
 | 6.1.4 | Rate limiting verification | Team | ⬜ |
 | 6.1.5 | Bot detection verification | Team | ⬜ |
 | 6.1.6 | Authentication bypass attempts | Team | ⬜ |
+
+Expected outcomes
+| Test | Expected Result | Pass Criteria |
+|------|-----------------|---------------|
+| SQL Injection | Request blocked, logged as CRITICAL | event_type='sql_injection', action='BLOCK' |
+| Rate limit breach | 429 response after threshold | Logs show rate_limit_exceeded |
 
 #### 6.2 Attack Simulation Examples
 
@@ -424,7 +430,16 @@ ARCJET_KEY=your_arcjet_key
 - [ ] HTTPS with all security headers active
 - [ ] Dashboard accessible with real metrics
 
+
+### Phase 7:  Rollback Strategy
+## Rollback Procedures
+| Scenario | Action | Recovery Time |
+|----------|--------|---------------|
+| Bad deployment | Revert to previous Vercel deployment | < 5 minutes |
+| Database migration failure | Run rollback script in migrations/ | < 15 minutes |
+| API key compromise | Rotate keys, redeploy | < 30 minutes |
 ---
+
 
 ## 4. PRD Acceptance Criteria Mapping
 

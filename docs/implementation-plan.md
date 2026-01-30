@@ -282,6 +282,8 @@ ALTER TABLE security_events ENABLE ROW LEVEL SECURITY;
 
 #### 4.3 Security Agent Implementation
 
+The Security Agent produces structured, explainable threat classifications to support auditability and human review.
+
 | Task | Description | Owner | Status |
 |------|-------------|-------|--------|
 | 4.3.1 | Define securityAgentConfig | Team | ⬜ |
@@ -336,6 +338,13 @@ Endpoints will support chat interactions, security data retrieval, metrics visua
 | 5.2.3 | Integrate security analysis | Team | ⬜ |
 | 5.2.4 | Connect to persona agent | Team | ⬜ |
 | 5.2.5 | Log all security events | Team | ⬜ |
+
+### Role Definitions
+
+| Role | Capabilities |
+|-----|--------------|
+| User | Chat with digital twin |
+| Admin | View logs, metrics, exports |
 
 #### 5.3 Frontend Components
 

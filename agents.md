@@ -4,6 +4,12 @@
 
 This document defines the AI agents and their configurations for the Digital Twin III Cyber-Hardened Portfolio. These agents work together to provide an interactive, secure, and self-defending digital presence.
 
+Demo alignment and scope notes:
+- Digital Twin 3’s key requirement is to function as a "hacking simulation website" with a sandbox area where users can safely attempt common web vulnerabilities (e.g., SQL injection, XSS) and immediately see telemetry and blocking outcomes.
+- The initial AI chatbot shown in early demos is not part of the required scope; prioritize the sandbox attack-simulation flows and the security dashboard.
+- The security dashboard must surface metrics and telemetry (e.g., ArcJet, Supabase logs) and demonstrate resilience to basic penetration tools/scans (e.g., rate-limiting, Nikto scan blocking evidence).
+- Keep this file concise (ideally <500 lines) so GitHub Copilot can load and prioritize it effectively.
+
 ---
 
 ## 1. Digital Twin Persona Agent
@@ -98,6 +104,7 @@ export const securityAgentConfig = {
     - Identify SQL injection patterns
     - Recognize XSS and other attack vectors
     - Classify threat severity (LOW, MEDIUM, HIGH, CRITICAL)
+    - Support a controlled sandbox where attacks are allowed for learning purposes; in sandbox context prefer "CHALLENGE" or "LOG_ONLY" with clear labeling over "BLOCK" to demonstrate detection without impacting non-sandbox areas
     
     RESPONSE FORMAT (JSON):
     {
@@ -168,7 +175,7 @@ export async function analyzeInput(
     severity: null,
     confidence: 0.9,
     explanation: 'No threats detected',
-    recommendedAction: 'ALLOW',
+    recommendedAction: 'ALLOW', // In sandbox endpoints, prefer LOG_ONLY or CHALLENGE per orchestration rules
     timestamp: new Date(),
     sourceIP: context.ip,
     userAgent: context.userAgent,
@@ -712,6 +719,7 @@ export async function POST(request: NextRequest) {
   const threatAnalysis = await analyzeInput(message, { ip, userAgent });
 
   if (threatAnalysis.isThreat) {
+    // Sandbox-aware behavior: if endpoint is a sandbox path, prefer CHALLENGE/LOG_ONLY and display educational response
     await auditLogger.logEvent({
       eventType: 'THREAT_BLOCKED',
       severity: threatAnalysis.severity!,
@@ -720,7 +728,7 @@ export async function POST(request: NextRequest) {
       endpoint: '/api/chat',
       payload: message,
       threatType: threatAnalysis.threatType!,
-      action: 'BLOCK',
+      action: 'BLOCK', // or 'CHALLENGE' for sandbox endpoints
     });
 
     return NextResponse.json({
@@ -876,6 +884,28 @@ This agent architecture provides:
 | **Audit Logger** | Event logging | Structured logs, real-time alerts |
 
 All agents work together through the **Agent Orchestrator** to provide a secure, interactive, and self-defending digital presence.
+
+## 11. Hacking Simulation Sandbox
+
+Purpose: Provide a controlled environment where users can try common attacks and immediately see detection, logging, and mitigation.
+
+- Suggested routes:
+  - `/sandbox/sql` — Accepts test inputs; shows how parameterized queries and detection block SQLi.
+  - `/sandbox/xss` — Demonstrates CSP and output encoding; sanitizes and reflects safe content.
+  - `/sandbox/rate-limit` — Simulates per-IP/per-user limits; shows 429 behavior and audit log entry.
+- Behavior:
+  - Tag events from sandbox endpoints distinctly (e.g., metadata.sandbox=true) and prefer `CHALLENGE` or `LOG_ONLY` where safe.
+  - Display educational feedback explaining what was detected and why it was mitigated.
+  - Ensure no real data is exposed; use mock or isolated test tables.
+- Telemetry:
+  - Feed ArcJet and Supabase logs into the security dashboard.
+  - Visualize attempted vectors, severity, outcomes, and unique IP counts.
+
+## 12. Copilot & PRD Files
+
+- `agents.md` (this file) contains instructions and structure for Copilot; keep concise for optimal loading.
+- `docs/prd.md` is the Product Requirements Document (non-technical requirements).
+- If `PR.md` is referenced, maintain it as an alias that points to `docs/prd.md`.
 
 
 ## AI Study URLs & References

@@ -3,8 +3,6 @@
 
 // Note: This file includes a placeholder integration with a "rolldice" tool. Implement or adjust the import path as needed.
 
-import { rollDice } from '../tools/rolldice';
-
 export async function startMcpServer(): Promise<void> {
   console.log('MCP server initialized');
 

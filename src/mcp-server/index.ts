@@ -1,18 +1,15 @@
 // Minimal MCP server entry for mcp-server — replace with your implementation as needed.
 /// <reference types="node" />
 
-// Note: This file includes a placeholder integration with a "rolldice" tool. Implement or adjust the import path as needed.
+// Integrate the simple rolldice tool
+import { rollDice } from "../tools/rolldice";
 
 export async function startMcpServer(): Promise<void> {
   console.log('MCP server initialized');
 
   try {
-    if (typeof rollDice === 'function') {
-      const result = rollDice(6);
-      console.log('Rolldice result:', result);
-    } else {
-      console.log('rolldice tool not available — implement integration in src/tools/rolldice');
-    }
+    const result = rollDice(6);
+    console.log('Rolldice result:', result);
   } catch (err) {
     console.error('Error using rolldice tool:', err);
   }

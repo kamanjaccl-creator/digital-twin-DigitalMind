@@ -1,4 +1,8 @@
 export default function Home() {
+  const rollDice = () => {
+    const result = Math.floor(Math.random() * 6) + 1;
+    alert("You rolled: " + result);
+  };
   return (
     <main style={{
       maxWidth: 960,
@@ -12,6 +16,12 @@ export default function Home() {
         This is the landing page for the hacking simulation sandbox and security dashboard. Explore
         the sandbox routes, review documentation, and track performance improvements.
       </p>
+
+      <section style={{ textAlign: "center", marginTop: 16, padding: 16, border: "1px solid #eee", borderRadius: 8 }}>
+        <h2 style={{ margin: 0 }}>Digital Twin System — Production Ready</h2>
+        <p style={{ marginTop: 8 }}>Week 4 Deployment Successful</p>
+        <button onClick={rollDice} style={{ marginTop: 12, padding: "8px 12px", cursor: "pointer" }}>Roll Dice 🎲</button>
+      </section>
 
       <section style={{ marginTop: 24 }}>
         <h2>Sandbox</h2>

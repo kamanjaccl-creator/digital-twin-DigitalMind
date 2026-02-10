@@ -46,3 +46,16 @@ This log documents dataset cleaning, prompt structure refinements, and API usage
 - Continue incremental dataset curation with clear commit messages
 
 See also: `performance-comparison.md`.
+
+## Data Refinement Log — Week 4
+
+Changes made:
+- Removed duplicate training entries
+- Improved prompt instructions
+- Structured chatbot responses
+- Updated fallback handling
+
+Impact:
+- Faster responses
+- More relevant answers
+- Improved reliability

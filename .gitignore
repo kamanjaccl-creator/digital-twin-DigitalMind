@@ -29,5 +29,9 @@ Thumbs.db
 # TypeScript
 *.tsbuildinfo
 
+# Ignore compiled JS artifacts in src (use TS sources)
+src/**/*.js
+src/**/*.js.map
+
 # Misc
 *.local

@@ -13,10 +13,10 @@ export default function Home() {
       fontFamily: "system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
       lineHeight: 1.6
     }}>
-      <h1 style={{ marginBottom: 8 }}>Cybersecurity Engineer Portfolio</h1>
+      <h1 style={{ marginBottom: 8 }}>Digital Twin III — Hack Me If You Can</h1>
       <p style={{ color: "#555", marginBottom: 24 }}>
-        A modern portfolio showcasing secure web engineering, AI security agents, and a live
-        hacking simulation sandbox.
+        This isn&apos;t a static portfolio. It&apos;s a live cyber lab built to be scanned,
+        attacked, monitored, and continuously hardened.
       </p>
 
       <section
@@ -31,9 +31,9 @@ export default function Home() {
         <div style={{ flex: 1 }}>
           <h2 style={{ marginTop: 0 }}>About</h2>
           <p>
-            This digital twin highlights practical security skills: building hardened web flows,
-            detecting common attacks, and explaining security decisions clearly to both engineers
-            and non-technical stakeholders.
+            Your Digital Twin is treated as a real target: a web application backed by data,
+            defended with layered controls, and instrumented to capture attacker behaviour and
+            your responses.
           </p>
         </div>
         <div
@@ -46,7 +46,7 @@ export default function Home() {
           }}
         >
           <h2 style={{ margin: 0 }}>Live Demo</h2>
-          <p style={{ marginTop: 8 }}>Deployed on Vercel and ready for recruiters and reviewers.</p>
+          <p style={{ marginTop: 8 }}>Deployed on Vercel and ready to be tested, safely.</p>
           <button
             onClick={rollDice}
             style={{ marginTop: 12, padding: "8px 12px", cursor: "pointer", borderRadius: 6 }}
@@ -59,9 +59,25 @@ export default function Home() {
       <section style={{ marginTop: 16 }}>
         <h2>Featured Capabilities</h2>
         <ul>
-          <li>Hacking simulation sandbox for SQL injection, XSS, and rate limiting.</li>
-          <li>AI-powered agents for threat detection, analytics, and content generation.</li>
-          <li>Structured security logging and a planned real-time dashboard.</li>
+          <li>Hosts your professional identity and project content on a live site.</li>
+          <li>Detects and blocks real threats like SQL injection, XSS, and prompt injection.</li>
+          <li>Analyses attacker behaviour and surfaces risk in human-readable reports.</li>
+          <li>Shows security as a lifecycle: detection, response, remediation, hardening.</li>
+          <li>Communicates your cyber maturity to employers with real telemetry.</li>
+        </ul>
+      </section>
+
+      <section style={{ marginTop: 24 }}>
+        <h2>Threats &amp; Defenses</h2>
+        <p style={{ color: "#555" }}>
+          The portfolio is designed to demonstrate resilience against common real-world issues:
+        </p>
+        <ul>
+          <li>SQL injection and malicious payloads against data-backed endpoints.</li>
+          <li>Prompt injection attempts against AI agents and automation.</li>
+          <li>Authentication and authorization failures.</li>
+          <li>Broken access control and privilege escalation paths.</li>
+          <li>Automated bot and scanner traffic (rate limiting, challenges).</li>
         </ul>
       </section>
 
@@ -89,8 +105,9 @@ export default function Home() {
       <section style={{ marginTop: 24, marginBottom: 16 }}>
         <h2>Contact</h2>
         <p>
-          Use this portfolio as a live example during interviews or screenings. You can link
-          directly to this site from your resume, LinkedIn, or GitHub profile.
+          Use this site as a case study in interviews and technical discussions. Link it from
+          your resume, LinkedIn, or GitHub to demonstrate that you understand modern
+          application security in practice.
         </p>
       </section>
     </main>

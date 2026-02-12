@@ -16,10 +16,16 @@ SAFETY:
 - Never execute real attacks; only explain them.
 - If the user asks for harmful actions, explain why they are unsafe and redirect to learning.
 `;
+let openaiClient: OpenAI | null = null;
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+function getOpenAIClient(): OpenAI | null {
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) return null;
+  if (!openaiClient) {
+    openaiClient = new OpenAI({ apiKey });
+  }
+  return openaiClient;
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -76,7 +82,8 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    if (!process.env.OPENAI_API_KEY) {
+    const client = getOpenAIClient();
+    if (!client) {
       // Graceful fallback when chat is not configured
       return NextResponse.json({
         reply:
@@ -90,7 +97,7 @@ export async function POST(request: NextRequest) {
       { role: "user" as const, content: message },
     ];
 
-    const completion = await openai.chat.completions.create({
+    const completion = await client.chat.completions.create({
       model: "gpt-4.1-mini",
       messages,
       temperature: 0.7,

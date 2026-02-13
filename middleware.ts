@@ -1,7 +1,70 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isSpoofedBot } from "@arcjet/inspect";
 import { aj } from "./lib/arcjet";
-import { logSecurityEvent } from "./lib/audit-logger";
+
+type SecurityAction = "ALLOW" | "BLOCK" | "CHALLENGE" | "LOG_ONLY";
+
+interface SecurityEvent {
+  eventType:
+    | "THREAT_DETECTED"
+    | "THREAT_BLOCKED"
+    | "LOGIN_ATTEMPT"
+    | "ACCESS_DENIED"
+    | "RATE_LIMITED";
+  severity: "LOW" | "MEDIUM" | "HIGH" | "CRITICAL";
+  sourceIP?: string;
+  userAgent?: string;
+  endpoint: string;
+  payload?: string;
+  threatType?: string;
+  action: SecurityAction;
+  sessionId?: string;
+  userId?: string;
+  metadata?: Record<string, any>;
+}
+
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY;
+
+async function logSecurityEvent(event: SecurityEvent): Promise<void> {
+  if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY) {
+    return;
+  }
+
+  const safePayload = event.payload
+    ? event.payload
+        .replace(/password['"]\s*:\s*['"][^'"]+['"]/gi, 'password: "[REDACTED]"')
+        .replace(/token['"]\s*:\s*['"][^'"]+['"]/gi, 'token: "[REDACTED]"')
+        .slice(0, 1000)
+    : undefined;
+
+  try {
+    await fetch(`${SUPABASE_URL}/rest/v1/security_events`, {
+      method: "POST",
+      headers: {
+        apikey: SUPABASE_SERVICE_KEY,
+        Authorization: `Bearer ${SUPABASE_SERVICE_KEY}`,
+        "Content-Type": "application/json",
+        Prefer: "return=minimal",
+      },
+      body: JSON.stringify({
+        event_type: event.eventType,
+        severity: event.severity,
+        source_ip: event.sourceIP,
+        user_agent: event.userAgent,
+        endpoint: event.endpoint,
+        payload: safePayload,
+        threat_type: event.threatType,
+        action: event.action === "LOG_ONLY" ? "ALLOW" : event.action,
+        session_id: event.sessionId,
+        user_id: event.userId,
+        metadata: event.metadata ?? {},
+      }),
+    });
+  } catch (error) {
+    console.error("Failed to log security event from middleware", error);
+  }
+}
 
 export const config = {
   matcher: ["/api/:path*"],

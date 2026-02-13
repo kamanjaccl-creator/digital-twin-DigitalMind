@@ -11,177 +11,100 @@ export default function LiveCyberLabPage() {
         background: "#020617",
       }}
     >
-      <h1 style={{ fontSize: 28, marginBottom: 16 }}>Live Cyber Lab (Digital Twin III)</h1>
+      <h1 style={{ fontSize: 28, marginBottom: 16 }}>Digital Twin III — Cyber-Hardened Portfolio</h1>
+      <p style={{ color: "#9ca3af", fontSize: 14, marginBottom: 16 }}>
+        <strong>Hack us if you can.</strong> This portfolio is no longer just a showcase of
+        work—it is a monitored, security-aware web system designed to run under real-world
+        conditions.
+      </p>
+      <p style={{ color: "#9ca3af", fontSize: 14, marginBottom: 16 }}>
+        Modern professional web applications are active targets. Systems that manage data,
+        users, and AI-driven features must be built to defend, monitor, and continuously
+        improve their resilience. This project transforms our portfolio into a cyber-secured,
+        intelligence-driven digital platform that demonstrates practical security
+        implementation rather than theoretical claims.
+      </p>
       <p style={{ color: "#9ca3af", fontSize: 14, marginBottom: 24 }}>
-        A cyber-hardened personal website that behaves like a live target: inviting ethical
-        attacks, detecting and blocking them in real time, and surfacing rich telemetry to
-        demonstrate how I defend and continuously harden a system.
+        Developed as a collaborative initiative within an industry-aligned program delivered by
+        <strong> ausbiz Consulting</strong>, this project focuses on building a production-ready
+        web application capable of detecting threats, protecting data, and demonstrating
+        defensive system design.
       </p>
 
-      {/* 1. Vision and Threat Model */}
       <section style={{ marginBottom: 32 }}>
-        <h2 style={{ fontSize: 20, marginBottom: 8 }}>1. Vision and Threat Model</h2>
-        <p style={{ color: "#9ca3af", fontSize: 14, marginBottom: 12 }}>
-          The Live Cyber Lab is my Digital Twin: a cyber-hardened version of my professional
-          identity that is intentionally exposed to controlled attacks. Instead of a static,
-          brochure-style portfolio, this Digital Twin behaves like a production web application
-          under fireinstrumented so that attacks become evidence of my security practice, not
-          weaknesses to exploit.
-        </p>
-        <h3 style={{ fontSize: 16, marginBottom: 6 }}>From Portfolio to Digital Twin</h3>
-        <ul style={{ color: "#9ca3af", fontSize: 14, paddingLeft: 20, marginBottom: 12 }}>
-          <li>Hosts my public identity and real security projects</li>
-          <li>Exposes deliberate attack surfaces (SQLi, XSS, auth flows, chatbot APIs)</li>
-          <li>Implements real detection, blocking, and logging behind the scenes</li>
-          <li>Surfaces telemetry through a Security Dashboard and evidence documents</li>
-        </ul>
-        <h3 style={{ fontSize: 16, marginBottom: 6 }}>Threat Model</h3>
+        <h2 style={{ fontSize: 20, marginBottom: 8 }}>From Portfolio to Secure Digital System</h2>
         <p style={{ color: "#9ca3af", fontSize: 14, marginBottom: 8 }}>
-          The lab is explicitly designed to withstand and showcase defences against:
+          Our team designed and deployed a portfolio platform that integrates security
+          controls, monitoring mechanisms, and layered defensive architecture to address common
+          web application vulnerabilities.
+        </p>
+        <p style={{ color: "#9ca3af", fontSize: 14, marginBottom: 8 }}>
+          Security considerations include protection against:
         </p>
         <ul style={{ color: "#9ca3af", fontSize: 14, paddingLeft: 20 }}>
-          <li>
-            <strong>SQL Injection</strong>: union-based payloads, boolean tautologies, stacked
-            queries, and schema enumeration attempts aimed at manipulating database queries.
-          </li>
-          <li>
-            <strong>Prompt Injection</strong>: attempts to override system prompts, exfiltrate
-            hidden instructions, or bypass safety constraints in the chatbot.
-          </li>
-          <li>
-            <strong>Automated Bot &amp; Scanner Attacks</strong>: high-frequency scripted
-            requests, endpoint enumeration, and brute-force style behaviour.
-          </li>
-          <li>
-            <strong>XSS &amp; Malicious Payloads</strong>: script injection, event-handler abuse,
-            and crafted HTML/JS inputs.
-          </li>
-          <li>
-            <strong>Authentication &amp; Access-Control Failures</strong>: broken access control
-            and privilege-abuse scenarios.
-          </li>
+          <li>SQL injection attacks</li>
+          <li>Prompt injection and other malicious inputs</li>
+          <li>Authentication and authorization weaknesses</li>
+          <li>Broken access control</li>
+          <li>Malicious payload execution (e.g., XSS)</li>
+          <li>Automated bot activity and suspicious traffic behaviour</li>
         </ul>
+        <p style={{ color: "#9ca3af", fontSize: 14, marginTop: 8 }}>
+          Rather than treating security as a static feature, the system operates as a live
+          cyber environment where behaviour is continuously monitored and improvements are
+          regularly implemented.
+        </p>
       </section>
 
-      {/* 2. Secure Architecture & Defensive Layers */}
       <section style={{ marginBottom: 32 }}>
-        <h2 style={{ fontSize: 20, marginBottom: 8 }}>2. Secure Architecture &amp; Defensive Layers</h2>
-        <p style={{ color: "#9ca3af", fontSize: 14, marginBottom: 12 }}>
-          The Live Cyber Lab is structured as a layered defensive architecture, mirroring a
-          modern production-grade web stack.
-        </p>
-        <h3 style={{ fontSize: 16, marginBottom: 6 }}>Secure Application &amp; CMS Foundations</h3>
-        <ul style={{ color: "#9ca3af", fontSize: 14, paddingLeft: 20, marginBottom: 12 }}>
-          <li>
-            <strong>Next.js (App Router) + TypeScript</strong>: clear separation of public pages,
-            APIs, and admin-like endpoints with strong typing.
-          </li>
-          <li>
-            <strong>Managed Postgres (via Supabase)</strong>: structured content tables
-            (projects, posts) and a dedicated <code>security_events</code> table for audit logs.
-          </li>
-          <li>
-            <strong>Authentication &amp; Access Control</strong>: protected admin-style endpoints
-            that demonstrate both correct and incorrect access patterns.
-          </li>
-        </ul>
-        <h3 style={{ fontSize: 16, marginBottom: 6 }}>Defensive Controls: WAF, Firewalls, Detection</h3>
-        <ul style={{ color: "#9ca3af", fontSize: 14, paddingLeft: 20 }}>
-          <li>
-            Rule-based detectors for SQLi, XSS, and prompt injection, classifying threats as
-            <code>SQL_INJECTION</code>, <code>MALICIOUS_PAYLOAD</code>,
-            <code>PROMPT_INJECTION</code>, and more.
-          </li>
-          <li>
-            Per-IP, per-endpoint rate limiting on chatbot and sandbox APIs, logging
-            <code>BOT_BEHAVIOR</code> and <code>RATE_LIMITED</code> events to simulate
-            WAF/firewall behaviour.
-          </li>
-          <li>
-            AI-aware safety on the chatbot: prompt-injection detection and refusal to execute
-            harmful instructions.
-          </li>
-        </ul>
-      </section>
-
-      {/* 3. Threat Telemetry Dashboard */}
-      <section style={{ marginBottom: 32 }}>
-        <h2 style={{ fontSize: 20, marginBottom: 8 }}>3. Threat Telemetry Dashboard</h2>
-        <p style={{ color: "#9ca3af", fontSize: 14, marginBottom: 12 }}>
-          At the heart of the Live Cyber Lab is an Ethical Hacking Zone and a Threat Telemetry
-          Dashboard that turns hostile activity into actionable insight.
-        </p>
-        <h3 style={{ fontSize: 16, marginBottom: 6 }}>Ethical Hacking Zone</h3>
+        <h2 style={{ fontSize: 20, marginBottom: 8 }}>Evidence-Based Security Approach</h2>
         <p style={{ color: "#9ca3af", fontSize: 14, marginBottom: 8 }}>
-          Public sandbox routes invite safe experimentation:
-        </p>
-        <ul style={{ color: "#9ca3af", fontSize: 14, paddingLeft: 20, marginBottom: 12 }}>
-          <li><code>/sandbox/sql</code>  SQL injection payloads and server-side detection.</li>
-          <li>
-            <code>/sandbox/xss</code>  XSS / malicious payload detection and sanitisation.
-          </li>
-          <li>
-            <code>/sandbox/auth</code>  authentication and access-control misbehaviour.
-          </li>
-          <li>
-            <code>/sandbox/rate-limit</code>  high-frequency / bot-style traffic.
-          </li>
-        </ul>
-        <h3 style={{ fontSize: 16, marginBottom: 6 }}>Dashboard &amp; Behaviour Analysis</h3>
-        <p style={{ color: "#9ca3af", fontSize: 14, marginBottom: 8 }}>
-          A dedicated dashboard aggregates <code>security_events</code> for the last 24 hours,
-          showing:
+          The project emphasises measurable and observable security practices. The platform is
+          structured to support:
         </p>
         <ul style={{ color: "#9ca3af", fontSize: 14, paddingLeft: 20 }}>
-          <li>Total events and blocked vs allowed/challenged actions.</li>
-          <li>
-            Threat counts by type (SQL injection, prompt injection, malicious payloads,
-            auth failures, bot behaviour).
-          </li>
-          <li>
-            Time-ordered activity with endpoint, severity, and source IP for attacker
-            behaviour analysis.
-          </li>
+          <li>System activity logging and monitoring</li>
+          <li>Threat detection and attacker behaviour analysis</li>
+          <li>Risk awareness and defensive configuration tuning</li>
+          <li>Documentation of system refinement and improvements over time</li>
+          <li>Continuous system hardening through iterative development</li>
         </ul>
+        <p style={{ color: "#9ca3af", fontSize: 14, marginTop: 8 }}>
+          This transforms the portfolio into a defensible case study of secure deployment and
+          operational resilience.
+        </p>
       </section>
 
-      {/* 4. Evidence of Resilience */}
       <section style={{ marginBottom: 32 }}>
-        <h2 style={{ fontSize: 20, marginBottom: 8 }}>4. Evidence of Resilience</h2>
+        <h2 style={{ fontSize: 20, marginBottom: 8 }}>What This Project Demonstrates</h2>
         <p style={{ color: "#9ca3af", fontSize: 14, marginBottom: 8 }}>
-          Beyond blocking attacks, the lab is supported by technical evidence that documents how
-          findings are assessed and resolved over time. This includes, for each major threat
-          category:
+          By completing this project, our team delivers a system that:
         </p>
         <ul style={{ color: "#9ca3af", fontSize: 14, paddingLeft: 20 }}>
-          <li>CVSS scoring sheets with rationale for each vector.</li>
-          <li>Risk reports summarising likelihood, impact, and residual risk.</li>
-          <li>Penetration test summaries and red-team style attack notes.</li>
+          <li>Hosts professional identity and project work in a security-focused environment</li>
+          <li>Implements defensive controls within a real cloud deployment</li>
+          <li>Demonstrates awareness of modern cybersecurity risks and attack patterns</li>
+          <li>Applies security as an ongoing lifecycle practice, not a one-off task</li>
           <li>
-            Remediation notes and hardening history linked back to specific telemetry or test
-            results.
+            Reflects real-world development, observability, and deployment standards
           </li>
         </ul>
+        <p style={{ color: "#9ca3af", fontSize: 14, marginTop: 8 }}>
+          This cyber-hardened Digital Twin represents a production-ready application built with
+          collaboration, secure architecture, and continuous improvement at its core.
+        </p>
       </section>
 
-      {/* 5. Security as a Lifecycle */}
       <section>
-        <h2 style={{ fontSize: 20, marginBottom: 8 }}>5. Security as a Lifecycle</h2>
+        <h2 style={{ fontSize: 20, marginBottom: 8 }}>Project Vision</h2>
         <p style={{ color: "#9ca3af", fontSize: 14, marginBottom: 8 }}>
-          The most important outcome of this project is not a single \"secure release\" but the
-          demonstration of security as an ongoing lifecycle.
-        </p>
-        <p style={{ color: "#9ca3af", fontSize: 14, marginBottom: 8 }}>
-          The lab follows a continuous loop: expose and attract (via safe sandboxes), detect and
-          observe (through rich logging), assess and prioritise (using CVSS and risk analysis),
-          respond and harden (by tightening rules and architecture), and document and
-          communicate (through reports and evidence).
+          This project is more than a portfolio—it is a deployable, auditable demonstration of
+          secure web development practice. It reflects our ability to design systems that are
+          not only functional and scalable, but also resilient and professionally defensible.
         </p>
         <p style={{ color: "#9ca3af", fontSize: 14 }}>
-          By running this Digital Twin in the open, I demonstrate that I can design defensible
-          architectures, operate a system under real-world pressure, and improve security over
-          time. This Live Cyber Lab is not only a portfolio; it is a practical demonstration of
-          how I think and work as a cyber security professional.
+          Digital Twin III represents a system designed not just to function, but to
+          withstand.
         </p>
       </section>
     </main>

@@ -117,8 +117,7 @@ export default function Home() {
               modern AI tools.
             </p>
             <p style={{ color: "#e5e7eb", fontSize: 13, fontWeight: 500 }}>
-              Secure. Monitored. Production-ready. Real deployment. Real security. Real
-              collaboration.
+              Secure. Monitored. Production-ready. Built to be tested, attacked, and improved.
             </p>
             <div
               style={{
@@ -251,11 +250,16 @@ export default function Home() {
         {/* About */}
         <section id="about" style={{ marginBottom: 32 }}>
           <h2 style={{ fontSize: 20, marginBottom: 8 }}>What this Digital Twin represents</h2>
-          <p style={{ color: "#9ca3af", fontSize: 14 }}>
+          <p style={{ color: "#9ca3af", fontSize: 14, marginBottom: 8 }}>
             Every production web app is a target. This Digital Twin turns that risk into a
             teaching tool: a controlled cyber range where you can deliberately attack, observe
             detections and blocks, practise incident response, and document how you harden the
             system release by release.
+          </p>
+          <p style={{ color: "#9ca3af", fontSize: 14 }}>
+            For hiring managers, this site is both a portfolio and a live security case study:
+            it hosts my professional identity and projects, exposes safe attack surfaces, and
+            shows how I manage security as an ongoing lifecycle instead of a one-time checkbox.
           </p>
         </section>
 

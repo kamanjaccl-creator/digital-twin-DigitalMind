@@ -129,6 +129,42 @@ export default async function DashboardPage() {
           </div>
         </section>
 
+        {/* Threat mix */}
+        <section style={{ marginBottom: 24 }}>
+          <h2 style={{ fontSize: 16, marginBottom: 8 }}>Threat mix (last 24 hours)</h2>
+          {events.length === 0 ? (
+            <p style={{ fontSize: 13, color: "#9ca3af" }}>
+              No telemetry yet. Use the sandbox endpoints and security tools to generate
+              real attack traffic, then refresh this page.
+            </p>
+          ) : (
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: 8,
+              }}
+            >
+              {Object.entries(threatsByType).map(([type, count]) => (
+                <div
+                  key={type}
+                  style={{
+                    padding: "6px 10px",
+                    borderRadius: 999,
+                    border: "1px solid #1f2937",
+                    background: "#020617",
+                    fontSize: 12,
+                    color: "#e5e7eb",
+                  }}
+                >
+                  <span style={{ opacity: 0.75 }}>{type}</span>
+                  <span style={{ marginLeft: 8, color: "#a5b4fc" }}>×{count}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
+
         {/* Active alerts */}
         <section style={{ marginBottom: 24 }}>
           <h2 style={{ fontSize: 16, marginBottom: 8 }}>Active alerts</h2>

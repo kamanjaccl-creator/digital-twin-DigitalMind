@@ -95,6 +95,39 @@ export default function LiveCyberLabPage() {
         </p>
       </section>
 
+      <section style={{ marginBottom: 32 }}>
+        <h2 style={{ fontSize: 20, marginBottom: 8 }}>Security as a Lifecycle</h2>
+        <p style={{ color: "#9ca3af", fontSize: 14, marginBottom: 8 }}>
+          The system is designed around a simple but disciplined security lifecycle that can be
+          demonstrated live:
+        </p>
+        <ol style={{ color: "#9ca3af", fontSize: 14, paddingLeft: 20 }}>
+          <li>
+            <strong>Prevent</strong> — Arcjet acts as a WAF and rate limiter at the edge, while
+            input validation, output encoding, and role-based access control harden the
+            application itself.
+          </li>
+          <li>
+            <strong>Detect</strong> — Custom detectors flag SQL injection, XSS, prompt injection,
+            auth failures, and bot behaviour. Every event is written to Supabase as structured
+            telemetry.
+          </li>
+          <li>
+            <strong>Respond</strong> — The security dashboard highlights active alerts and recent
+            incidents so an operator can quickly see what was blocked, from where, and why.
+          </li>
+          <li>
+            <strong>Improve</strong> — Attack patterns from logs and Arcjet are used to tighten
+            rules, tune rate limits, add new detectors, and update this case study with
+            evidence of changes over time.
+          </li>
+        </ol>
+        <p style={{ color: "#9ca3af", fontSize: 14, marginTop: 8 }}>
+          This shows employers not just that security controls exist, but that they are
+          observable, testable, and part of a continuous improvement loop.
+        </p>
+      </section>
+
       <section>
         <h2 style={{ fontSize: 20, marginBottom: 8 }}>Project Vision</h2>
         <p style={{ color: "#9ca3af", fontSize: 14, marginBottom: 8 }}>

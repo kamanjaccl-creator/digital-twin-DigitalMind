@@ -2,176 +2,182 @@
 
 export default function Home() {
   return (
-    <div className="cyber-bg min-h-screen text-foreground font-sans">
-      <header className="border-b border-border/30 backdrop-blur-md sticky top-0 z-10">
-        <div className="max-w-[1040px] mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_12px_hsl(var(--primary))]" />
-            <span className="font-semibold text-foreground">Digital Twin III</span>
+    <div className="cyber-bg">
+      {/* Header */}
+      <header
+        style={{
+          borderBottom: "1px solid rgba(30,41,59,0.5)",
+          backdropFilter: "blur(12px)",
+          position: "sticky",
+          top: 0,
+          zIndex: 10,
+        }}
+      >
+        <div
+          className="container"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            paddingTop: 14,
+            paddingBottom: 14,
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <span className="glow-dot" />
+            <span style={{ fontWeight: 600, fontSize: 15 }}>Digital Twin III</span>
           </div>
-          <nav className="flex gap-4 text-sm">
-            <a href="/#about" className="text-foreground/80 hover:text-primary transition-colors no-underline">
-              About
-            </a>
-            <a href="/#sandbox" className="text-foreground/80 hover:text-primary transition-colors no-underline">
-              Sandbox
-            </a>
-            <a href="/#threats" className="text-foreground/80 hover:text-primary transition-colors no-underline">
-              Threats
-            </a>
-            <a href="/#stack" className="text-foreground/80 hover:text-primary transition-colors no-underline">
-              Stack
-            </a>
-            <a href="/lab" className="text-foreground/80 hover:text-primary transition-colors no-underline">
-              Lab Case Study
-            </a>
-            <a href="/dashboard" className="text-foreground/80 hover:text-primary transition-colors no-underline">
-              Dashboard
-            </a>
+          <nav style={{ display: "flex", gap: 16, fontSize: 13 }}>
+            {[
+              { href: "/#about", label: "About" },
+              { href: "/#sandbox", label: "Sandbox" },
+              { href: "/#threats", label: "Threats" },
+              { href: "/#stack", label: "Stack" },
+              { href: "/lab", label: "Lab Case Study" },
+              { href: "/dashboard", label: "Dashboard" },
+            ].map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                style={{ color: "var(--fg-muted)", textDecoration: "none" }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--primary)")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "var(--fg-muted)")}
+              >
+                {l.label}
+              </a>
+            ))}
           </nav>
         </div>
       </header>
 
-      <main className="max-w-[1040px] mx-auto px-6 py-8 pb-10">
+      <main className="container" style={{ paddingTop: 32, paddingBottom: 40 }}>
         {/* Hero */}
-        <section className="flex flex-wrap gap-8 items-stretch mb-10">
-          {/* Left: personal summary & CTAs */}
-          <div className="flex-1 min-w-[260px]">
-            <p className="text-xs tracking-[2px] text-accent uppercase">
+        <section style={{ display: "flex", flexWrap: "wrap", gap: 32, alignItems: "stretch", marginBottom: 40 }}>
+          <div style={{ flex: "1 1 260px" }}>
+            <p style={{ fontSize: 11, letterSpacing: 2, color: "var(--accent)", textTransform: "uppercase" }}>
               Cyber-Hardened Portfolio
             </p>
-            <h1 className="text-[32px] font-bold mt-2 mb-1 text-foreground">DigitalMind</h1>
-            <p className="text-muted-foreground text-sm max-w-[560px] mb-2 leading-relaxed">
+            <h1 style={{ fontSize: 34, fontWeight: 700, marginTop: 8, marginBottom: 6 }}>DigitalMind</h1>
+            <p style={{ color: "var(--fg-muted)", fontSize: 14, maxWidth: 560, marginBottom: 10, lineHeight: 1.7 }}>
               A secure, cloud-deployed AI portfolio developed through teamwork and real-world
               testing. This Digital Twin is more than a website — it is a live hacking lab where
-              you can safely attack defined surfaces and watch the detections appear in real
-              time.
+              you can safely attack defined surfaces and watch the detections appear in real time.
             </p>
-            <p className="text-muted-foreground text-sm max-w-[560px] mb-2 leading-relaxed">
+            <p style={{ color: "var(--fg-muted)", fontSize: 14, maxWidth: 560, marginBottom: 10, lineHeight: 1.7 }}>
               Built within an industry-aligned program, it showcases cloud deployment,
               cybersecurity engineering, and collaborative software development using
               modern AI tools.
             </p>
-            <p className="text-foreground text-[13px] font-medium">
+            <p style={{ fontSize: 13, fontWeight: 500 }}>
               Secure. Monitored. Production-ready. Built to be tested, attacked, and improved.
             </p>
-            <div className="mt-4 flex gap-3 flex-wrap">
-              <a
-                href="/#sandbox"
-                className="px-4 py-2 rounded-full bg-primary text-primary-foreground text-sm font-medium no-underline hover:brightness-110 transition-all"
-              >
-                Explore attack sandbox
-              </a>
-              <a
-                href="/dashboard"
-                className="px-4 py-2 rounded-full border border-border text-foreground text-sm no-underline hover:border-primary/50 hover:text-primary transition-all"
-              >
-                View security dashboard
-              </a>
-              <a
-                href="/lab"
-                className="px-4 py-2 rounded-full border border-border text-foreground text-sm no-underline hover:border-primary/50 hover:text-primary transition-all"
-              >
-                Read case study
-              </a>
+            <div style={{ marginTop: 18, display: "flex", gap: 12, flexWrap: "wrap" }}>
+              <a href="/#sandbox" className="btn-primary">Explore attack sandbox</a>
+              <a href="/dashboard" className="btn-outline">View security dashboard</a>
+              <a href="/lab" className="btn-outline">Read case study</a>
             </div>
           </div>
 
-          {/* Right: security overview card */}
-          <div className="basis-[280px] grow-0 shrink-0 rounded-[20px] p-4 bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.35),transparent_60%),hsl(var(--background))] border border-border/40 flex flex-col gap-3">
-            <div className="flex justify-between items-center">
+          {/* Right card */}
+          <div
+            style={{
+              flexBasis: 290,
+              flexGrow: 0,
+              flexShrink: 0,
+              borderRadius: 20,
+              padding: 18,
+              background: "radial-gradient(circle at top, rgba(56,189,248,0.25), transparent 60%), var(--bg-card)",
+              border: "1px solid rgba(30,41,59,0.5)",
+              display: "flex",
+              flexDirection: "column",
+              gap: 14,
+            }}
+          >
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <div>
-                <p className="text-[11px] text-accent m-0">Live Lab</p>
-                <p className="text-sm font-semibold m-0 text-foreground">Attack surface summary</p>
+                <p style={{ fontSize: 11, color: "var(--accent)", margin: 0 }}>Live Lab</p>
+                <p style={{ fontSize: 14, fontWeight: 600, margin: 0 }}>Attack surface summary</p>
               </div>
-              <span className="text-[10px] px-2 py-1 rounded-full bg-primary/15 text-primary">
-                Online
-              </span>
+              <span className="badge badge-online">Online</span>
             </div>
-            <div className="rounded-[14px] bg-card/90 p-3 text-xs text-foreground">
-              <ul className="m-0 pl-4">
+            <div style={{ borderRadius: 14, background: "rgba(11,18,37,0.9)", padding: 14, fontSize: 13 }}>
+              <ul style={{ margin: 0, paddingLeft: 18 }}>
                 <li>Target SQL injection, XSS, and auth flows in safe sandboxes.</li>
-                <li>Every attempt is logged into the Supabase-backed security dashboard.</li>
-                <li>Use your own testing tools and payloads — this lab is built to be attacked.</li>
+                <li style={{ marginTop: 4 }}>Every attempt is logged into the Supabase-backed security dashboard.</li>
+                <li style={{ marginTop: 4 }}>Use your own testing tools and payloads — this lab is built to be attacked.</li>
               </ul>
             </div>
             <a
               href="/dashboard"
-              className="mt-auto text-xs px-3 py-2 rounded-full border border-border no-underline text-foreground flex justify-between items-center hover:border-primary/50 hover:text-primary transition-all"
+              className="btn-outline"
+              style={{ marginTop: "auto", display: "flex", justifyContent: "space-between", fontSize: 12 }}
             >
               <span>Open security dashboard</span>
-              <span>{'↗'}</span>
+              <span>{">"}</span>
             </a>
           </div>
         </section>
 
         {/* About */}
-        <section id="about" className="mb-8 scroll-mt-24">
-          <h2 className="text-xl font-semibold mb-2 text-foreground">What this Digital Twin represents</h2>
-          <p className="text-muted-foreground text-sm mb-2 leading-relaxed">
+        <section id="about" style={{ marginBottom: 32, scrollMarginTop: 80 }}>
+          <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 10 }}>What this Digital Twin represents</h2>
+          <p style={{ color: "var(--fg-muted)", fontSize: 14, lineHeight: 1.7, marginBottom: 8 }}>
             Every production web app is a target. This Digital Twin turns that risk into a
             teaching tool: a controlled cyber range where you can deliberately attack, observe
             detections and blocks, practise incident response, and document how you harden the
             system release by release.
           </p>
-          <p className="text-muted-foreground text-sm leading-relaxed">
+          <p style={{ color: "var(--fg-muted)", fontSize: 14, lineHeight: 1.7 }}>
             For hiring managers, this site is both a portfolio and a live security case study:
             it hosts my professional identity and projects, exposes safe attack surfaces, and
             shows how I manage security as an ongoing lifecycle instead of a one-time checkbox.
           </p>
         </section>
 
-        {/* Threats & Defenses */}
-        <section id="threats" className="mb-8 scroll-mt-24">
-          <h2 className="text-xl font-semibold mb-2 text-foreground">Threats you train against</h2>
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-4 text-sm">
-            <div className="p-3 rounded-xl border border-border hover:border-primary/30 transition-colors">
-              <h3 className="text-[15px] font-semibold mb-1.5 text-foreground">Injection attacks</h3>
-              <p className="text-muted-foreground">SQL injection, prompt injection, and malicious payloads.</p>
-            </div>
-            <div className="p-3 rounded-xl border border-border hover:border-primary/30 transition-colors">
-              <h3 className="text-[15px] font-semibold mb-1.5 text-foreground">{'Auth & access control'}</h3>
-              <p className="text-muted-foreground">Authentication failures, broken access control, privilege abuse.</p>
-            </div>
-            <div className="p-3 rounded-xl border border-border hover:border-primary/30 transition-colors">
-              <h3 className="text-[15px] font-semibold mb-1.5 text-foreground">{'Bots & automation'}</h3>
-              <p className="text-muted-foreground">Automated scanners, brute-force tools, and scripted attacks.</p>
-            </div>
+        {/* Threats */}
+        <section id="threats" style={{ marginBottom: 32, scrollMarginTop: 80 }}>
+          <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 10 }}>Threats you train against</h2>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
+            {[
+              { title: "Injection attacks", desc: "SQL injection, prompt injection, and malicious payloads." },
+              { title: "Auth & access control", desc: "Authentication failures, broken access control, privilege abuse." },
+              { title: "Bots & automation", desc: "Automated scanners, brute-force tools, and scripted attacks." },
+            ].map((t) => (
+              <div key={t.title} className="link-card">
+                <h3 style={{ fontSize: 15, fontWeight: 600, marginBottom: 6 }}>{t.title}</h3>
+                <p style={{ color: "var(--fg-muted)", fontSize: 13, margin: 0, lineHeight: 1.6 }}>{t.desc}</p>
+              </div>
+            ))}
           </div>
         </section>
 
         {/* Sandbox */}
-        <section id="sandbox" className="mb-8 scroll-mt-24">
-          <h2 className="text-xl font-semibold mb-2 text-foreground">Hacking simulation sandbox</h2>
-          <p className="text-muted-foreground text-sm leading-relaxed">
+        <section id="sandbox" style={{ marginBottom: 32, scrollMarginTop: 80 }}>
+          <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 10 }}>Hacking simulation sandbox</h2>
+          <p style={{ color: "var(--fg-muted)", fontSize: 14, lineHeight: 1.7 }}>
             These live sandboxes are wired to real detection, logging, and rate limiting. You can
             safely try common attacks and then open the dashboard to observe how the system
             classified and handled your traffic.
           </p>
-          <ul className="text-sm mt-3 space-y-2">
-            <li>
-              <a href="/sandbox/sql" className="text-accent hover:underline">/sandbox/sql</a>
-              {' — SQL injection payloads, detection, and safe query patterns.'}
-            </li>
-            <li>
-              <a href="/sandbox/xss" className="text-accent hover:underline">/sandbox/xss</a>
-              {' — reflected XSS attempts, output encoding, and malicious payload detection.'}
-            </li>
-            <li>
-              <a href="/sandbox/rate-limit" className="text-accent hover:underline">/sandbox/rate-limit</a>
-              {' — automated/bot-style traffic, scanners, and basic WAF-style rate limiting.'}
-            </li>
-            <li>
-              <a href="/sandbox/auth" className="text-accent hover:underline">/sandbox/auth</a>
-              {' — authentication failures, broken access control, and privilege-abuse scenarios.'}
-            </li>
+          <ul style={{ fontSize: 14, marginTop: 14, listStyle: "none", padding: 0, display: "flex", flexDirection: "column", gap: 8 }}>
+            {[
+              { href: "/sandbox/sql", label: "/sandbox/sql", desc: " — SQL injection payloads, detection, and safe query patterns." },
+              { href: "/sandbox/xss", label: "/sandbox/xss", desc: " — reflected XSS attempts, output encoding, and malicious payload detection." },
+              { href: "/sandbox/rate-limit", label: "/sandbox/rate-limit", desc: " — automated/bot-style traffic, scanners, and basic WAF-style rate limiting." },
+              { href: "/sandbox/auth", label: "/sandbox/auth", desc: " — authentication failures, broken access control, and privilege-abuse scenarios." },
+            ].map((s) => (
+              <li key={s.href}>
+                <a href={s.href} style={{ color: "var(--accent)" }}>{s.label}</a>
+                <span style={{ color: "var(--fg-muted)" }}>{s.desc}</span>
+              </li>
+            ))}
           </ul>
         </section>
 
         {/* Stack */}
-        <section id="stack" className="mb-8 scroll-mt-24">
-          <h2 className="text-xl font-semibold mb-2 text-foreground">Security-focused stack behind the lab</h2>
-          <ul className="text-sm text-foreground space-y-1">
+        <section id="stack" style={{ marginBottom: 32, scrollMarginTop: 80 }}>
+          <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 10 }}>Security-focused stack behind the lab</h2>
+          <ul style={{ fontSize: 14, display: "flex", flexDirection: "column", gap: 6, paddingLeft: 20 }}>
             <li>Next.js (App Router) + TypeScript for a modern, testable, security-first frontend.</li>
             <li>Supabase for database, authentication, and structured security event logging.</li>
             <li>Arcjet for WAF protections, basic bot controls, and rate limiting.</li>
@@ -180,27 +186,25 @@ export default function Home() {
           </ul>
         </section>
 
-        {/* Team mission */}
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold mb-2 text-foreground">{'Team mission & collaboration'}</h2>
-          <p className="text-muted-foreground text-sm mb-2 leading-relaxed">
+        {/* Team */}
+        <section style={{ marginBottom: 32 }}>
+          <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 10 }}>{"Team mission & collaboration"}</h2>
+          <p style={{ color: "var(--fg-muted)", fontSize: 14, lineHeight: 1.7, marginBottom: 8 }}>
             Our mission is to design and deploy intelligent digital systems that are secure,
             resilient, and production-ready. We believe modern web applications must be built
             with security as a continuous lifecycle, supported by collaborative development,
             real-world testing, and measurable improvement.
           </p>
-          <p className="text-muted-foreground text-sm mb-2 leading-relaxed">
+          <p style={{ color: "var(--fg-muted)", fontSize: 14, lineHeight: 1.7 }}>
             Through structured teamwork and cloud-based deployment, we transform concepts into
             defensible, operational systems that reflect professional engineering standards.
-            This lab was built using Next.js/React, the OpenAI API, Supabase, and Vercel, with
-            GitHub and ClickUp underpinning version control and project coordination.
           </p>
         </section>
 
-        {/* Call to action */}
-        <section className="mb-4">
-          <h2 className="text-xl font-semibold mb-2 text-foreground">Use this live lab as your case study</h2>
-          <p className="text-muted-foreground text-sm leading-relaxed">
+        {/* CTA */}
+        <section style={{ marginBottom: 16 }}>
+          <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 10 }}>Use this live lab as your case study</h2>
+          <p style={{ color: "var(--fg-muted)", fontSize: 14, lineHeight: 1.7 }}>
             Share this site with recruiters, hiring managers, and mentors. It is a deployable,
             auditable cyber lab that demonstrates how you design, test, and improve defences —
             not just theory on a CV, but a running system that can be safely attacked, defended,

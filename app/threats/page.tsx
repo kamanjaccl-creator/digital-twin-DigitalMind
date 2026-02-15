@@ -1,40 +1,39 @@
 export default function ThreatsPage() {
+  const threats = [
+    {
+      title: "Injection attacks",
+      desc: "SQL injection, prompt injection, and malicious payloads targeting data stores, interpreters, or AI models.",
+    },
+    {
+      title: "Auth & access control",
+      desc: "Authentication failures, broken access control, and privilege abuse scenarios across sandbox endpoints and admin surfaces.",
+    },
+    {
+      title: "Bots & automation",
+      desc: "Automated scanners, brute force tools, scripted requests, and spoofed user agents detected and rate-limited at the edge.",
+    },
+  ];
+
   return (
-    <div className="cyber-bg min-h-screen font-sans">
-      <main className="max-w-[960px] mx-auto px-6 py-10">
-        <a href="/" className="text-accent text-sm hover:underline mb-4 inline-block">
-          {'← Back to site'}
+    <div className="cyber-bg">
+      <main className="container-md" style={{ paddingTop: 40, paddingBottom: 40 }}>
+        <a href="/" style={{ fontSize: 13, display: "inline-block", marginBottom: 16 }}>
+          {"<- Back to site"}
         </a>
-        <h1 className="text-2xl font-bold text-foreground mb-4">Threats you train against</h1>
-        <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+        <h1 style={{ fontSize: 24, fontWeight: 700, marginBottom: 16 }}>Threats you train against</h1>
+        <p style={{ color: "var(--fg-muted)", fontSize: 14, lineHeight: 1.7, marginBottom: 24 }}>
           This lab is designed around the most common and high-impact web application threats.
-          Each category is instrumented so you can attack it safely and see how the system
-          responds.
+          Each category is instrumented so you can attack it safely and see how the system responds.
         </p>
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-4 text-sm">
-          <div className="p-4 rounded-xl border border-border hover:border-primary/30 transition-colors">
-            <h2 className="text-base font-semibold text-foreground mb-2">Injection attacks</h2>
-            <p className="text-muted-foreground leading-relaxed">
-              SQL injection, prompt injection, and malicious payloads targeting data stores,
-              interpreters, or AI models.
-            </p>
-          </div>
-          <div className="p-4 rounded-xl border border-border hover:border-primary/30 transition-colors">
-            <h2 className="text-base font-semibold text-foreground mb-2">{'Auth & access control'}</h2>
-            <p className="text-muted-foreground leading-relaxed">
-              Authentication failures, broken access control, and privilege abuse scenarios across
-              sandbox endpoints and admin surfaces.
-            </p>
-          </div>
-          <div className="p-4 rounded-xl border border-border hover:border-primary/30 transition-colors">
-            <h2 className="text-base font-semibold text-foreground mb-2">{'Bots & automation'}</h2>
-            <p className="text-muted-foreground leading-relaxed">
-              Automated scanners, brute force tools, scripted requests, and spoofed user agents
-              detected and rate-limited at the edge.
-            </p>
-          </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
+          {threats.map((t) => (
+            <div key={t.title} className="link-card">
+              <h2 style={{ fontSize: 16, fontWeight: 600, marginBottom: 8 }}>{t.title}</h2>
+              <p style={{ color: "var(--fg-muted)", fontSize: 13, lineHeight: 1.6, margin: 0 }}>{t.desc}</p>
+            </div>
+          ))}
         </div>
-        <p className="text-muted-foreground text-sm leading-relaxed mt-6">
+        <p style={{ color: "var(--fg-muted)", fontSize: 14, lineHeight: 1.7, marginTop: 24 }}>
           Combined with the security dashboard, this page helps you explain exactly what kinds of
           behaviour your system is meant to withstand.
         </p>

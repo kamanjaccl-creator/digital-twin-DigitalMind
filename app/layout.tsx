@@ -10,8 +10,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "Digital Twin III",
-  description:
-    "Cyber-Hardened Portfolio with sandbox and security dashboard",
+  description: "Cyber-Hardened Portfolio with sandbox and security dashboard",
 };
 
 export const viewport: Viewport = {
@@ -24,11 +23,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}
-    >
-      <body className="font-sans">{children}</body>
+    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
+      <body>{children}</body>
     </html>
   );
 }

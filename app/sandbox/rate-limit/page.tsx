@@ -16,12 +16,7 @@ export default function SandboxRateLimit() {
   const burst = async () => {
     if (loading) return;
     setLoading(true);
-
-    let limited = 0;
-    let total = 0;
-    let lastStatus: number | null = null;
-    let lastMessage = "";
-
+    let limited = 0, total = 0, lastStatus: number | null = null, lastMessage = "";
     try {
       for (let i = 0; i < 6; i++) {
         total += 1;
@@ -29,9 +24,7 @@ export default function SandboxRateLimit() {
         lastStatus = res.status;
         const data = await res.json().catch(() => ({}));
         lastMessage = data.message || data.error || "";
-        if (!res.ok) {
-          limited += 1;
-        }
+        if (!res.ok) limited += 1;
       }
     } catch {
       lastStatus = null;
@@ -43,49 +36,34 @@ export default function SandboxRateLimit() {
   };
 
   return (
-    <div className="cyber-bg min-h-screen font-sans">
-      <main className="max-w-[720px] mx-auto px-6 py-10">
-        <a href="/sandbox" className="text-accent text-sm hover:underline mb-4 inline-block">
-          {'← Back to sandbox'}
-        </a>
-        <h1 className="text-2xl font-bold text-foreground mb-2">Sandbox: Automated / Bot Traffic</h1>
-        <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-          This sandbox sends a short burst of requests to{" "}
-          <code className="text-accent font-mono text-xs">/api/sandbox/rate-limit</code>{" "}
-          to simulate basic scanner or bot behaviour. The backend applies rate limiting and logs events
-          to the security dashboard.
+    <div className="cyber-bg">
+      <main className="container-sm" style={{ paddingTop: 40, paddingBottom: 40 }}>
+        <a href="/sandbox" style={{ fontSize: 13, display: "inline-block", marginBottom: 16 }}>{"<- Back to sandbox"}</a>
+        <h1 style={{ fontSize: 24, fontWeight: 700, marginBottom: 8 }}>Sandbox: Automated / Bot Traffic</h1>
+        <p style={{ color: "var(--fg-muted)", fontSize: 14, lineHeight: 1.7, marginBottom: 24 }}>
+          Sends a burst of requests to{" "}
+          <code style={{ color: "var(--accent)", fontFamily: "var(--font-mono)", fontSize: 12 }}>/api/sandbox/rate-limit</code>{" "}
+          to simulate scanner or bot behaviour. The backend applies rate limiting and logs events.
         </p>
 
-        <button
-          onClick={burst}
-          disabled={loading}
-          className="px-4 py-2 rounded-full bg-primary text-primary-foreground text-sm font-medium hover:brightness-110 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-        >
+        <button onClick={burst} disabled={loading} className="btn-primary">
           {loading ? "Sending burst..." : "Send burst of requests"}
         </button>
 
         {result && (
-          <div className="mt-6 p-4 rounded-xl border border-border bg-card">
-            <p className="text-sm text-foreground">
-              <strong>Total requests:</strong> {result.totalRequests}
+          <div className="card" style={{ marginTop: 24 }}>
+            <p style={{ fontSize: 14 }}><strong>Total requests:</strong> {result.totalRequests}</p>
+            <p style={{ fontSize: 14, marginTop: 4 }}>
+              <strong>Rate-limited:</strong>{" "}
+              <span style={{ color: result.limitedCount > 0 ? "var(--destructive)" : "var(--primary)" }}>{result.limitedCount}</span>
             </p>
-            <p className="text-sm text-foreground mt-1">
-              <strong>Rate-limited responses:</strong>{" "}
-              <span className={result.limitedCount > 0 ? "text-destructive" : "text-primary"}>
-                {result.limitedCount}
-              </span>
-            </p>
-            <p className="text-sm text-foreground mt-1">
-              <strong>Last status:</strong> {result.lastStatus ?? "n/a"}
-            </p>
-            {result.lastMessage && (
-              <p className="text-sm text-muted-foreground mt-2">{result.lastMessage}</p>
-            )}
+            <p style={{ fontSize: 14, marginTop: 4 }}><strong>Last status:</strong> {result.lastStatus ?? "n/a"}</p>
+            {result.lastMessage && <p style={{ fontSize: 14, color: "var(--fg-muted)", marginTop: 8 }}>{result.lastMessage}</p>}
           </div>
         )}
 
-        <p className="mt-6 text-muted-foreground text-xs leading-relaxed">
-          {'Educational note: in a real deployment, rate limits combine with Arcjet\'s edge protections to slow down automated recon, credential stuffing, and noisy bot traffic while keeping normal users fast.'}
+        <p style={{ marginTop: 24, color: "var(--fg-muted)", fontSize: 12, lineHeight: 1.7 }}>
+          {"Educational note: rate limits combine with Arcjet's edge protections to slow automated recon, credential stuffing, and noisy bot traffic."}
         </p>
       </main>
     </div>

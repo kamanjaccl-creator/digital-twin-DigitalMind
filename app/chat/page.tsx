@@ -27,19 +27,13 @@ export default function ChatPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: trimmed, history: nextMessages }),
       });
-
       const data = await res.json();
       const reply = data.reply || data.message || "No response received.";
-
       setMessages((prev) => [...prev, { role: "assistant", content: reply }]);
     } catch {
       setMessages((prev) => [
         ...prev,
-        {
-          role: "assistant",
-          content:
-            "I ran into an error talking to the backend. Please check that the deployment has OPENAI_API_KEY configured.",
-        },
+        { role: "assistant", content: "Error connecting to backend. Please check OPENAI_API_KEY is configured." },
       ]);
     } finally {
       setLoading(false);
@@ -54,38 +48,60 @@ export default function ChatPage() {
   };
 
   return (
-    <div className="cyber-bg min-h-screen font-sans flex justify-center px-4 py-10">
-      <div className="w-full max-w-[720px] rounded-2xl border border-border/40 bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.18),transparent_55%),hsl(var(--background))] flex flex-col p-4">
-        <header className="mb-3">
-          <h1 className="text-xl font-bold text-foreground mb-1">
-            {'Digital Twin Chatbot (Prompt Injection Lab)'}
+    <div className="cyber-bg" style={{ display: "flex", justifyContent: "center", padding: "40px 16px" }}>
+      <div
+        style={{
+          width: "100%",
+          maxWidth: 720,
+          borderRadius: 16,
+          border: "1px solid rgba(30,41,59,0.5)",
+          background: "radial-gradient(circle at top, rgba(56,189,248,0.15), transparent 55%), var(--bg-card)",
+          display: "flex",
+          flexDirection: "column",
+          padding: 20,
+        }}
+      >
+        <header style={{ marginBottom: 14 }}>
+          <h1 style={{ fontSize: 20, fontWeight: 700, marginBottom: 6 }}>
+            {"Digital Twin Chatbot (Prompt Injection Lab)"}
           </h1>
-          <p className="text-[13px] text-muted-foreground leading-relaxed">
-            This assistant is tuned for cybersecurity topics and recruiter-friendly answers, and it is
-            protected against prompt-injection attempts. You can try to override its rules or system
-            prompt — detected attacks are blocked and logged as{" "}
-            <code className="text-accent font-mono text-xs">PROMPT_INJECTION</code> events in the
-            security dashboard.
+          <p style={{ fontSize: 13, color: "var(--fg-muted)", lineHeight: 1.6 }}>
+            This assistant is tuned for cybersecurity topics and is protected against prompt-injection
+            attempts. Detected attacks are blocked and logged as{" "}
+            <code style={{ color: "var(--accent)", fontFamily: "var(--font-mono)", fontSize: 12 }}>PROMPT_INJECTION</code>{" "}
+            events in the security dashboard.
           </p>
         </header>
 
-        <div className="flex-1 min-h-[280px] max-h-[420px] overflow-y-auto p-2 rounded-xl bg-card/80 mb-3">
+        <div
+          style={{
+            flex: 1,
+            minHeight: 280,
+            maxHeight: 420,
+            overflowY: "auto",
+            padding: 10,
+            borderRadius: 12,
+            background: "rgba(11,18,37,0.8)",
+            marginBottom: 14,
+          }}
+        >
           {messages.length === 0 && (
-            <p className="text-[13px] text-muted-foreground">
-              {'Start with something like: "What does Digital Twin III demonstrate?" or "How do you defend against SQL injection here?"'}
+            <p style={{ fontSize: 13, color: "var(--fg-muted)" }}>
+              {'Start with something like: "What does Digital Twin III demonstrate?"'}
             </p>
           )}
           {messages.map((m, idx) => (
-            <div
-              key={idx}
-              className={`mb-2 flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
-            >
+            <div key={idx} style={{ marginBottom: 8, display: "flex", justifyContent: m.role === "user" ? "flex-end" : "flex-start" }}>
               <div
-                className={`max-w-[80%] px-3 py-1.5 rounded-[10px] text-sm whitespace-pre-wrap ${
-                  m.role === "user"
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-secondary text-secondary-foreground"
-                }`}
+                style={{
+                  maxWidth: "80%",
+                  padding: "8px 14px",
+                  borderRadius: 10,
+                  fontSize: 14,
+                  whiteSpace: "pre-wrap",
+                  background: m.role === "user" ? "var(--primary)" : "var(--border)",
+                  color: m.role === "user" ? "var(--bg)" : "var(--fg)",
+                }}
               >
                 {m.content}
               </div>
@@ -100,14 +116,11 @@ export default function ChatPage() {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Type a question about your digital twin, security setup, or attack simulations..."
-            className="w-full resize-none rounded-[10px] border border-border p-2 text-sm mb-2 bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+            className="input"
+            style={{ resize: "none", marginBottom: 8, fontFamily: "var(--font-sans)" }}
           />
-          <div className="flex justify-end gap-2">
-            <button
-              onClick={sendMessage}
-              disabled={loading}
-              className="px-4 py-1.5 rounded-full bg-primary text-primary-foreground text-sm font-medium hover:brightness-110 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-            >
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <button onClick={sendMessage} disabled={loading} className="btn-primary">
               {loading ? "Sending..." : "Send"}
             </button>
           </div>

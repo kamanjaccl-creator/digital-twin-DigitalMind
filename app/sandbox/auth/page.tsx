@@ -12,81 +12,75 @@ export default function AuthSandboxPage() {
     setLoading(true);
     setError(null);
     setResult(null);
-
     try {
       const url = "/api/admin/secret" + (token ? `?token=${encodeURIComponent(token)}` : "");
       const res = await fetch(url, { method: "GET" });
-
       const data = await res.json().catch(() => ({}));
-      if (!res.ok) {
-        throw new Error(data.message || data.error || "Request failed");
-      }
-
+      if (!res.ok) throw new Error(data.message || data.error || "Request failed");
       setResult({ status: res.status, data });
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : "Something went wrong";
-      console.error("Auth sandbox error", err);
-      setError(message);
+      setError(err instanceof Error ? err.message : "Something went wrong");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="cyber-bg min-h-screen font-sans">
-      <main className="max-w-[720px] mx-auto px-6 py-10">
-        <a href="/sandbox" className="text-accent text-sm hover:underline mb-4 inline-block">
-          {'← Back to sandbox'}
-        </a>
-        <h1 className="text-2xl font-bold text-foreground mb-2">{'Sandbox: Authentication & Access Control'}</h1>
-        <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-          This sandbox simulates an admin-only API at{" "}
-          <code className="text-accent font-mono text-xs">/api/admin/secret</code>.
+    <div className="cyber-bg">
+      <main className="container-sm" style={{ paddingTop: 40, paddingBottom: 40 }}>
+        <a href="/sandbox" style={{ fontSize: 13, display: "inline-block", marginBottom: 16 }}>{"<- Back to sandbox"}</a>
+        <h1 style={{ fontSize: 24, fontWeight: 700, marginBottom: 8 }}>{"Sandbox: Authentication & Access Control"}</h1>
+        <p style={{ color: "var(--fg-muted)", fontSize: 14, lineHeight: 1.7, marginBottom: 24 }}>
+          Simulates an admin-only API at{" "}
+          <code style={{ color: "var(--accent)", fontFamily: "var(--font-mono)", fontSize: 12 }}>/api/admin/secret</code>.
           Requests without the correct token are logged as{" "}
-          <code className="text-accent font-mono text-xs">ACCESS_DENIED</code>{" "}
-          or broken access-control attempts in the security_events table.
+          <code style={{ color: "var(--accent)", fontFamily: "var(--font-mono)", fontSize: 12 }}>ACCESS_DENIED</code>{" "}
+          events.
         </p>
 
-        <div className="flex flex-col gap-3">
-          <label className="text-sm text-foreground">
-            {'Admin token (demo)'}
+        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+          <label style={{ fontSize: 14 }}>
+            Admin token (demo)
             <input
               type="text"
               value={token}
               onChange={(e) => setToken(e.target.value)}
               placeholder="leave blank to simulate unauthorized access"
-              className="mt-1 w-full px-3 py-2 rounded-lg border border-border bg-card text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+              className="input"
+              style={{ marginTop: 6 }}
             />
           </label>
-          <button
-            onClick={callEndpoint}
-            disabled={loading}
-            className="self-start px-4 py-2 rounded-full bg-primary text-primary-foreground text-sm font-medium hover:brightness-110 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-          >
+          <button onClick={callEndpoint} disabled={loading} className="btn-primary" style={{ alignSelf: "flex-start" }}>
             {loading ? "Calling API..." : "Call protected API"}
           </button>
         </div>
 
-        {error && (
-          <p className="mt-4 text-destructive text-sm">{error}</p>
-        )}
+        {error && <p style={{ marginTop: 16, color: "var(--destructive)", fontSize: 14 }}>{error}</p>}
 
         {result && (
-          <div className="mt-6 p-4 rounded-xl border border-border bg-card">
-            <p className="text-sm text-foreground">
-              <strong>Status:</strong> {result.status}
-            </p>
-            <pre className="mt-3 p-3 bg-background rounded-lg text-xs text-foreground font-mono overflow-x-auto border border-border">
+          <div className="card" style={{ marginTop: 24 }}>
+            <p style={{ fontSize: 14 }}><strong>Status:</strong> {result.status}</p>
+            <pre
+              style={{
+                marginTop: 12,
+                padding: 12,
+                background: "var(--bg)",
+                borderRadius: 8,
+                fontSize: 12,
+                fontFamily: "var(--font-mono)",
+                overflowX: "auto",
+                border: "1px solid var(--border)",
+              }}
+            >
               {JSON.stringify(result.data, null, 2)}
             </pre>
           </div>
         )}
 
-        <p className="mt-6 text-muted-foreground text-xs leading-relaxed">
+        <p style={{ marginTop: 24, color: "var(--fg-muted)", fontSize: 12, lineHeight: 1.7 }}>
           Hint: the demo token is configured via{" "}
-          <code className="text-accent font-mono">DEMO_ADMIN_TOKEN</code>{" "}
-          (default value is a non-sensitive placeholder). Use this to demonstrate both failed
-          and successful authorization flows and then show the corresponding entries on the dashboard.
+          <code style={{ color: "var(--accent)", fontFamily: "var(--font-mono)" }}>DEMO_ADMIN_TOKEN</code>{" "}
+          (default value is a non-sensitive placeholder).
         </p>
       </main>
     </div>

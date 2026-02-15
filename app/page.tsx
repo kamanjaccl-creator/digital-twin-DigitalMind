@@ -102,8 +102,9 @@ export default function Home() {
               }}
             >
               A secure, cloud-deployed AI portfolio developed through teamwork and real-world
-              testing. This Digital Twin is more than a websiteit is a live cyber lab designed
-              to detect threats, protect data, and demonstrate observable security practices.
+              testing. This Digital Twin is more than a websiteit is a live hacking lab where
+              you can safely attack defined surfaces and watch the detections appear in real
+              time.
             </p>
             <p
               style={{
@@ -222,9 +223,9 @@ export default function Home() {
               }}
             >
               <ul style={{ margin: 0, paddingLeft: 16 }}>
-                <li>Target SQL injection, XSS, and auth flaws in safe sandboxes.</li>
-                <li>Every attempt is logged to the security dashboard.</li>
-                <li>Use your own tools and payloadsthis lab is built to be attacked.</li>
+                <li>Target SQL injection, XSS, and auth flows in safe sandboxes.</li>
+                <li>Every attempt is logged into the Supabase-backed security dashboard.</li>
+                <li>Use your own testing tools and payloadsthis lab is built to be attacked.</li>
               </ul>
             </div>
             <a
@@ -295,32 +296,33 @@ export default function Home() {
           <h2 style={{ fontSize: 20, marginBottom: 8 }}>Hacking simulation sandbox</h2>
           <p style={{ color: "#9ca3af", fontSize: 14 }}>
             These live sandboxes are wired to real detection, logging, and rate limiting. You can
-            safely try common attacks and immediately see how the application reacts.
+            safely try common attacks and then open the dashboard to observe how the system
+            classified and handled your traffic.
           </p>
           <ul style={{ fontSize: 14 }}>
             <li>
               <a href="/sandbox/sql" style={{ color: "#38bdf8" }}>
                 /sandbox/sql
               </a>{" "}
-              ��� SQL injection payloads, detection, and safe query patterns.
+               SQL injection payloads, detection, and safe query patterns.
             </li>
             <li>
               <a href="/sandbox/xss" style={{ color: "#38bdf8" }}>
                 /sandbox/xss
               </a>{" "}
-              ��� reflected XSS attempts, output encoding, and malicious payload detection.
+               reflected XSS attempts, output encoding, and malicious payload detection.
             </li>
             <li>
               <a href="/sandbox/rate-limit" style={{ color: "#38bdf8" }}>
                 /sandbox/rate-limit
               </a>{" "}
-              ��� automated/bot-style traffic, scanners, and basic WAF-style rate limiting.
+               automated/bot-style traffic, scanners, and basic WAF-style rate limiting.
             </li>
             <li>
               <a href="/sandbox/auth" style={{ color: "#38bdf8" }}>
                 /sandbox/auth
               </a>{" "}
-              ��� authentication failures, broken access control, and privilege-abuse scenarios.
+               authentication failures, broken access control, and privilege-abuse scenarios.
             </li>
           </ul>
         </section>

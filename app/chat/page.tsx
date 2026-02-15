@@ -79,10 +79,12 @@ export default function ChatPage() {
         }}
       >
         <header style={{ marginBottom: 12 }}>
-          <h1 style={{ fontSize: 20, marginBottom: 4 }}>Digital Twin Chatbot</h1>
+          <h1 style={{ fontSize: 20, marginBottom: 4 }}>Digital Twin Chatbot (Prompt Injection Lab)</h1>
           <p style={{ fontSize: 13, color: "#9ca3af" }}>
-            Ask about this portfolio, security design decisions, or how the hacking sandbox works.
-            The assistant is tuned for cybersecurity topics and recruiter-friendly answers.
+            This assistant is tuned for cybersecurity topics and recruiter-friendly answers, and it is
+            protected against prompt-injection attempts. You can try to override its rules or system
+            promptdetected attacks are blocked and logged as <code>PROMPT_INJECTION</code> events in the
+            security dashboard.
           </p>
         </header>
 

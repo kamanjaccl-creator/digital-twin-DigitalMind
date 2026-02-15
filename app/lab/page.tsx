@@ -51,8 +51,9 @@ export default function LiveCyberLabPage() {
         </ul>
         <p style={{ color: "#9ca3af", fontSize: 14, marginTop: 8 }}>
           Rather than treating security as a static feature, the system operates as a live
-          cyber environment where behaviour is continuously monitored and improvements are
-          regularly implemented.
+          cyber environment: traffic is exercised using common testing tools, logged into
+          Supabase, surfaced through the dashboard, and used to drive regular hardening
+          changes.
         </p>
       </section>
 
@@ -67,7 +68,7 @@ export default function LiveCyberLabPage() {
           <li>Threat detection and attacker behaviour analysis</li>
           <li>Risk awareness and defensive configuration tuning</li>
           <li>Documentation of system refinement and improvements over time</li>
-          <li>Continuous system hardening through iterative development</li>
+            <li>Continuous system hardening through iterative development and retesting</li>
         </ul>
         <p style={{ color: "#9ca3af", fontSize: 14, marginTop: 8 }}>
           This transforms the portfolio into a defensible case study of secure deployment and

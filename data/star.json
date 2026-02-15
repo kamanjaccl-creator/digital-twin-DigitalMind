@@ -103,11 +103,6 @@
         ],
         "team": [
           {
-            "name": "Ashmin Aryal",
-            "role": "Team Lead / Star File Author",
-            "contributions": ["Created consolidated star.json including metadata, sample content, and agent configurations."]
-          },
-          {
             "name": "Victor Kamanja",
             "role": "Frontend Developer/PRD Author",
             "contributions": ["Defined project requirements, technical & functional specifications, risk & mitigation strategies."]
@@ -173,6 +168,6 @@
         }
       }
     }
-  }
-}
+  
+
 

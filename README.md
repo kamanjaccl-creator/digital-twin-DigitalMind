@@ -125,4 +125,3 @@ npm run dev:mcp
 ## Contributors
 - **Phuntshok Wangdruk:** Backend / AI Agents  
 - **Victor Kamanja:** Frontend Developer / PRD File  
-- **Ashmin Aryal:** Team Lead / STAR File & README

@@ -89,10 +89,7 @@ export default function Home() {
             >
               Cyber-Hardened Portfolio
             </p>
-            <h1 style={{ fontSize: 32, margin: "8px 0 4px" }}>Ashmin Aryal</h1>
-            <p style={{ fontSize: 18, color: "#38bdf8", marginBottom: 12 }}>
-              Cybersecurity-focused Software Engineer
-            </p>
+            <h1 style={{ fontSize: 32, margin: "8px 0 4px" }}>DigitalMind</h1>
             <p
               style={{
                 color: "#9ca3af",

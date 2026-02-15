@@ -186,8 +186,8 @@ export default function Home() {
           >
             {[
               {
-                name: "Next.js 16",
-                desc: "React Framework",
+                name: "Next.js (App Router)",
+                desc: "Modern, testable, security-first frontend",
                 icon: (
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <polyline points="16 18 22 12 16 6" />
@@ -197,7 +197,7 @@ export default function Home() {
               },
               {
                 name: "Supabase",
-                desc: "PostgreSQL + Auth",
+                desc: "Database, authentication, and structured security event logging",
                 icon: (
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <ellipse cx="12" cy="5" rx="9" ry="3" />
@@ -208,7 +208,7 @@ export default function Home() {
               },
               {
                 name: "Arcjet",
-                desc: "WAF + Bot Protection",
+                desc: "WAF protections, basic bot controls, and rate limiting",
                 icon: (
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
@@ -217,7 +217,7 @@ export default function Home() {
               },
               {
                 name: "Vercel",
-                desc: "Edge Deployment",
+                desc: "Hardened deployments, previews, and production-like environments",
                 icon: (
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M2 20h20L12 4z" />
@@ -226,7 +226,7 @@ export default function Home() {
               },
               {
                 name: "TypeScript",
-                desc: "Type Safety",
+                desc: "Strict type safety across the full stack",
                 icon: (
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="3" y="3" width="18" height="18" rx="2" />
@@ -237,7 +237,7 @@ export default function Home() {
               },
               {
                 name: "Security Utils",
-                desc: "Detection + Logging",
+                desc: "Injection detection, sanitisation, and logging",
                 icon: (
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <circle cx="12" cy="12" r="10" />

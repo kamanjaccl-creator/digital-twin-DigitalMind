@@ -177,13 +177,96 @@ export default function Home() {
         {/* Stack */}
         <section id="stack" style={{ marginBottom: 32, scrollMarginTop: 80 }}>
           <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 10 }}>Security-focused stack behind the lab</h2>
-          <ul style={{ fontSize: 14, display: "flex", flexDirection: "column", gap: 6, paddingLeft: 20 }}>
-            <li>Next.js (App Router) + TypeScript for a modern, testable, security-first frontend.</li>
-            <li>Supabase for database, authentication, and structured security event logging.</li>
-            <li>Arcjet for WAF protections, basic bot controls, and rate limiting.</li>
-            <li>Security utility functions for injection detection, sanitisation, and logging.</li>
-            <li>Vercel for hardened deployments, previews, and production-like environments.</li>
-          </ul>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+              gap: 12,
+            }}
+          >
+            {[
+              {
+                name: "Next.js 16",
+                desc: "React Framework",
+                icon: (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="16 18 22 12 16 6" />
+                    <polyline points="8 6 2 12 8 18" />
+                  </svg>
+                ),
+              },
+              {
+                name: "Supabase",
+                desc: "PostgreSQL + Auth",
+                icon: (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <ellipse cx="12" cy="5" rx="9" ry="3" />
+                    <path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5" />
+                    <path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3" />
+                  </svg>
+                ),
+              },
+              {
+                name: "Arcjet",
+                desc: "WAF + Bot Protection",
+                icon: (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  </svg>
+                ),
+              },
+              {
+                name: "Vercel",
+                desc: "Edge Deployment",
+                icon: (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M2 20h20L12 4z" />
+                  </svg>
+                ),
+              },
+              {
+                name: "TypeScript",
+                desc: "Type Safety",
+                icon: (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                    <path d="M12 8v8" />
+                    <path d="M8 12h8" />
+                  </svg>
+                ),
+              },
+              {
+                name: "Security Utils",
+                desc: "Detection + Logging",
+                icon: (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 16v-4" />
+                    <path d="M12 8h.01" />
+                  </svg>
+                ),
+              },
+            ].map((item) => (
+              <div
+                key={item.name}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 12,
+                  padding: "14px 16px",
+                  borderRadius: 12,
+                  background: "var(--bg-card)",
+                  border: "1px solid rgba(30,41,59,0.5)",
+                }}
+              >
+                <span style={{ color: "var(--fg-muted)", flexShrink: 0 }}>{item.icon}</span>
+                <div>
+                  <p style={{ margin: 0, fontWeight: 600, fontSize: 14 }}>{item.name}</p>
+                  <p style={{ margin: 0, color: "var(--fg-muted)", fontSize: 12 }}>{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </section>
 
         {/* Team */}

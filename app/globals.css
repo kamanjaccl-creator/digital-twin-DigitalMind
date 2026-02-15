@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 47% 3%;
+    --foreground: 210 20% 92%;
+    --card: 222 47% 5%;
+    --card-foreground: 210 20% 92%;
+    --popover: 222 47% 5%;
+    --popover-foreground: 210 20% 92%;
+    --primary: 142 71% 45%;
+    --primary-foreground: 222 47% 3%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 20% 92%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 16% 60%;
+    --accent: 199 89% 56%;
+    --accent-foreground: 222 47% 3%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 20% 92%;
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 142 71% 45%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Cyber background effect used across pages */
+.cyber-bg {
+  position: relative;
+  background:
+    radial-gradient(circle at top, rgba(56, 189, 248, 0.18), transparent 55%),
+    hsl(var(--background));
+  overflow: hidden;
+}
+
+.cyber-bg::before {
+  content: "";
+  position: fixed;
+  inset: -200px;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(34, 197, 94, 0.18), transparent 55%),
+    radial-gradient(circle at 80% 80%, rgba(56, 189, 248, 0.18), transparent 55%),
+    repeating-linear-gradient(
+      120deg,
+      rgba(15, 23, 42, 0.6) 0px,
+      rgba(15, 23, 42, 0.6) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  opacity: 0.9;
+  mix-blend-mode: screen;
+  animation: cyberShift 18s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes cyberShift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-220px, -220px, 0);
+  }
+}
+
+/* Scrollbar styling for dark theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--secondary));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground));
+}

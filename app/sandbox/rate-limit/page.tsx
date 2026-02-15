@@ -23,7 +23,6 @@ export default function SandboxRateLimit() {
     let lastMessage = "";
 
     try {
-      // Fire a small burst of requests in sequence so rate limiting and logging are exercised
       for (let i = 0; i < 6; i++) {
         total += 1;
         const res = await fetch("/api/sandbox/rate-limit", { method: "POST" });
@@ -34,7 +33,7 @@ export default function SandboxRateLimit() {
           limited += 1;
         }
       }
-    } catch (err) {
+    } catch {
       lastStatus = null;
       lastMessage = "Network error while sending burst.";
     } finally {
@@ -44,40 +43,51 @@ export default function SandboxRateLimit() {
   };
 
   return (
-    <main style={{ maxWidth: 720, margin: "40px auto", padding: 24 }}>
-      <h1>Sandbox: Automated / Bot Traffic</h1>
-      <p>
-        This sandbox sends a short burst of requests to
-        {" "}
-        <code>/api/sandbox/rate-limit</code>
-        {" "}
-        to simulate basic scanner or bot behaviour. The backend applies rate limiting and logs events
-        to the security dashboard.
-      </p>
-      <div style={{ display: "grid", gap: 12 }}>
-        <button onClick={burst} style={{ padding: "8px 12px", cursor: "pointer" }} disabled={loading}>
+    <div className="cyber-bg min-h-screen font-sans">
+      <main className="max-w-[720px] mx-auto px-6 py-10">
+        <a href="/sandbox" className="text-accent text-sm hover:underline mb-4 inline-block">
+          {'← Back to sandbox'}
+        </a>
+        <h1 className="text-2xl font-bold text-foreground mb-2">Sandbox: Automated / Bot Traffic</h1>
+        <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+          This sandbox sends a short burst of requests to{" "}
+          <code className="text-accent font-mono text-xs">/api/sandbox/rate-limit</code>{" "}
+          to simulate basic scanner or bot behaviour. The backend applies rate limiting and logs events
+          to the security dashboard.
+        </p>
+
+        <button
+          onClick={burst}
+          disabled={loading}
+          className="px-4 py-2 rounded-full bg-primary text-primary-foreground text-sm font-medium hover:brightness-110 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+        >
           {loading ? "Sending burst..." : "Send burst of requests"}
         </button>
-      </div>
-      {result && (
-        <div style={{ marginTop: 16, fontSize: 14 }}>
-          <p>
-            <strong>Total requests:</strong> {result.totalRequests}
-          </p>
-          <p>
-            <strong>Rate-limited responses:</strong> {result.limitedCount}
-          </p>
-          <p>
-            <strong>Last status:</strong> {result.lastStatus ?? "n/a"}
-          </p>
-          {result.lastMessage && <p style={{ marginTop: 4 }}>{result.lastMessage}</p>}
-        </div>
-      )}
-      <p style={{ marginTop: 16, color: "#555" }}>
-        Educational note: in a real deployment, rate limits combine with Arcjet's edge protections to
-        slow down automated recon, credential stuffing, and noisy bot traffic while keeping normal
-        users fast.
-      </p>
-    </main>
+
+        {result && (
+          <div className="mt-6 p-4 rounded-xl border border-border bg-card">
+            <p className="text-sm text-foreground">
+              <strong>Total requests:</strong> {result.totalRequests}
+            </p>
+            <p className="text-sm text-foreground mt-1">
+              <strong>Rate-limited responses:</strong>{" "}
+              <span className={result.limitedCount > 0 ? "text-destructive" : "text-primary"}>
+                {result.limitedCount}
+              </span>
+            </p>
+            <p className="text-sm text-foreground mt-1">
+              <strong>Last status:</strong> {result.lastStatus ?? "n/a"}
+            </p>
+            {result.lastMessage && (
+              <p className="text-sm text-muted-foreground mt-2">{result.lastMessage}</p>
+            )}
+          </div>
+        )}
+
+        <p className="mt-6 text-muted-foreground text-xs leading-relaxed">
+          {'Educational note: in a real deployment, rate limits combine with Arcjet\'s edge protections to slow down automated recon, credential stuffing, and noisy bot traffic while keeping normal users fast.'}
+        </p>
+      </main>
+    </div>
   );
 }

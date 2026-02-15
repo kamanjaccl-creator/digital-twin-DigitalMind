@@ -32,7 +32,7 @@ export default function ChatPage() {
       const reply = data.reply || data.message || "No response received.";
 
       setMessages((prev) => [...prev, { role: "assistant", content: reply }]);
-    } catch (err) {
+    } catch {
       setMessages((prev) => [
         ...prev,
         {
@@ -54,77 +54,38 @@ export default function ChatPage() {
   };
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        background: "#050816",
-        color: "#f9fafb",
-        fontFamily: "system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
-        display: "flex",
-        justifyContent: "center",
-        padding: "40px 16px",
-      }}
-    >
-      <div
-        style={{
-          width: "100%",
-          maxWidth: 720,
-          borderRadius: 16,
-          border: "1px solid rgba(148,163,184,0.4)",
-          background:
-            "radial-gradient(circle at top, rgba(56,189,248,0.18), transparent 55%), #020617",
-          display: "flex",
-          flexDirection: "column",
-          padding: 16,
-        }}
-      >
-        <header style={{ marginBottom: 12 }}>
-          <h1 style={{ fontSize: 20, marginBottom: 4 }}>Digital Twin Chatbot (Prompt Injection Lab)</h1>
-          <p style={{ fontSize: 13, color: "#9ca3af" }}>
+    <div className="cyber-bg min-h-screen font-sans flex justify-center px-4 py-10">
+      <div className="w-full max-w-[720px] rounded-2xl border border-border/40 bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.18),transparent_55%),hsl(var(--background))] flex flex-col p-4">
+        <header className="mb-3">
+          <h1 className="text-xl font-bold text-foreground mb-1">
+            {'Digital Twin Chatbot (Prompt Injection Lab)'}
+          </h1>
+          <p className="text-[13px] text-muted-foreground leading-relaxed">
             This assistant is tuned for cybersecurity topics and recruiter-friendly answers, and it is
             protected against prompt-injection attempts. You can try to override its rules or system
-            promptdetected attacks are blocked and logged as <code>PROMPT_INJECTION</code> events in the
+            prompt — detected attacks are blocked and logged as{" "}
+            <code className="text-accent font-mono text-xs">PROMPT_INJECTION</code> events in the
             security dashboard.
           </p>
         </header>
 
-        <div
-          style={{
-            flex: 1,
-            minHeight: 280,
-            maxHeight: 420,
-            overflowY: "auto",
-            padding: 8,
-            borderRadius: 12,
-            backgroundColor: "rgba(15,23,42,0.8)",
-            marginBottom: 12,
-          }}
-        >
+        <div className="flex-1 min-h-[280px] max-h-[420px] overflow-y-auto p-2 rounded-xl bg-card/80 mb-3">
           {messages.length === 0 && (
-            <p style={{ fontSize: 13, color: "#6b7280" }}>
-              Start with something like: "What does Digital Twin III demonstrate?" or
-              "How do you defend against SQL injection here?"
+            <p className="text-[13px] text-muted-foreground">
+              {'Start with something like: "What does Digital Twin III demonstrate?" or "How do you defend against SQL injection here?"'}
             </p>
           )}
           {messages.map((m, idx) => (
             <div
               key={idx}
-              style={{
-                marginBottom: 8,
-                display: "flex",
-                justifyContent: m.role === "user" ? "flex-end" : "flex-start",
-              }}
+              className={`mb-2 flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
             >
               <div
-                style={{
-                  maxWidth: "80%",
-                  padding: "6px 10px",
-                  borderRadius: 10,
-                  fontSize: 14,
-                  backgroundColor: m.role === "user" ? "#22c55e" : "#111827",
-                  color: m.role === "user" ? "#020617" : "#e5e7eb",
-                  whiteSpace: "pre-wrap",
-                }}
+                className={`max-w-[80%] px-3 py-1.5 rounded-[10px] text-sm whitespace-pre-wrap ${
+                  m.role === "user"
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-secondary text-secondary-foreground"
+                }`}
               >
                 {m.content}
               </div>
@@ -139,31 +100,13 @@ export default function ChatPage() {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Type a question about your digital twin, security setup, or attack simulations..."
-            style={{
-              width: "100%",
-              resize: "none",
-              borderRadius: 10,
-              border: "1px solid #4b5563",
-              padding: 8,
-              fontSize: 14,
-              marginBottom: 8,
-              backgroundColor: "#020617",
-              color: "#e5e7eb",
-            }}
+            className="w-full resize-none rounded-[10px] border border-border p-2 text-sm mb-2 bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
           />
-          <div style={{ display: "flex", justifyContent: "flex-end", gap: 8 }}>
+          <div className="flex justify-end gap-2">
             <button
               onClick={sendMessage}
               disabled={loading}
-              style={{
-                padding: "6px 14px",
-                borderRadius: 999,
-                border: "none",
-                backgroundColor: loading ? "#6b7280" : "#22c55e",
-                color: "#020617",
-                fontSize: 14,
-                cursor: loading ? "default" : "pointer",
-              }}
+              className="px-4 py-1.5 rounded-full bg-primary text-primary-foreground text-sm font-medium hover:brightness-110 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? "Sending..." : "Send"}
             </button>

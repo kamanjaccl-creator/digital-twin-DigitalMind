@@ -10,16 +10,18 @@ interface SecurityEventRow {
   source_ip: string | null;
   user_agent: string | null;
   timestamp: string;
-  metadata?: any | null;
+  metadata?: Record<string, unknown> | null;
 }
 
 function groupBy<T, K extends string | number | symbol>(items: T[], getKey: (item: T) => K) {
-  return items.reduce((acc, item) => {
-    const key = getKey(item);
-    // @ts-ignore
-    acc[key] = (acc[key] || 0) + 1;
-    return acc;
-  }, {} as Record<K, number>);
+  return items.reduce(
+    (acc, item) => {
+      const key = getKey(item);
+      (acc as Record<K, number>)[key] = ((acc as Record<K, number>)[key] || 0) + 1;
+      return acc;
+    },
+    {} as Record<K, number>
+  );
 }
 
 export default async function DashboardPage() {
@@ -27,16 +29,16 @@ export default async function DashboardPage() {
 
   if (!supabase) {
     return (
-      <main style={{ maxWidth: 960, margin: "40px auto", padding: 24 }}>
-        <h1>Security Dashboard</h1>
-        <p style={{ color: "#555" }}>
-          Supabase is not configured. Set <code>NEXT_PUBLIC_SUPABASE_URL</code> and
-          {" "}
-          <code>SUPABASE_SERVICE_KEY</code> and run the migration in
-          {" "}
-          <code>migrations/001_security_events.sql</code> to enable telemetry.
-        </p>
-      </main>
+      <div className="cyber-bg min-h-screen font-sans">
+        <main className="max-w-[960px] mx-auto px-6 py-10">
+          <h1 className="text-2xl font-bold text-foreground mb-4">Security Dashboard</h1>
+          <p className="text-muted-foreground text-sm">
+            Supabase is not configured. Set <code className="text-accent font-mono text-xs">NEXT_PUBLIC_SUPABASE_URL</code> and{" "}
+            <code className="text-accent font-mono text-xs">SUPABASE_SERVICE_KEY</code> and run the migration in{" "}
+            <code className="text-accent font-mono text-xs">migrations/001_security_events.sql</code> to enable telemetry.
+          </p>
+        </main>
+      </div>
     );
   }
 
@@ -55,7 +57,7 @@ export default async function DashboardPage() {
     console.error("Error loading security_events", error);
   }
 
-  const events: SecurityEventRow[] = (data as any) || [];
+  const events: SecurityEventRow[] = (data as SecurityEventRow[]) || [];
 
   const threatsByType = groupBy(events, (e) => e.threat_type || "UNKNOWN");
   const actions = groupBy(events, (e) => e.action);
@@ -67,144 +69,104 @@ export default async function DashboardPage() {
   const shieldTriggers = events.filter((e) => e.event_type === "THREAT_DETECTED").length;
   const uniqueIps = new Set(events.map((e) => e.source_ip).filter(Boolean)).size;
 
-  const arcjetEvents = events.filter((e) => e.metadata && e.metadata.provider === "arcjet");
+  const arcjetEvents = events.filter(
+    (e) => e.metadata && (e.metadata as Record<string, unknown>).provider === "arcjet"
+  );
   const arcjetBlocks = arcjetEvents.filter((e) => e.action === "BLOCK").length;
   const arcjetRateLimits = arcjetEvents.filter((e) => e.event_type === "RATE_LIMITED").length;
   const arcjetBots = arcjetEvents.filter(
-    (e) => e.threat_type === "BOT_BEHAVIOR" || (e.metadata && e.metadata.kind?.includes("bot"))
+    (e) =>
+      e.threat_type === "BOT_BEHAVIOR" ||
+      (e.metadata &&
+        typeof (e.metadata as Record<string, unknown>).kind === "string" &&
+        ((e.metadata as Record<string, unknown>).kind as string).includes("bot"))
   ).length;
 
   const activeAlerts = events.filter((e) => e.severity === "HIGH" || e.severity === "CRITICAL");
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        background: "#020617",
-        color: "#e5e7eb",
-        fontFamily: "system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
-      }}
-    >
-      <main style={{ maxWidth: 1040, margin: "0 auto", padding: "32px 24px 40px" }}>
-        <header
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginBottom: 24,
-          }}
-        >
+    <div className="cyber-bg min-h-screen font-sans">
+      <main className="max-w-[1040px] mx-auto px-6 py-8 pb-10">
+        <header className="flex justify-between items-center mb-6">
           <div>
-            <p style={{ fontSize: 12, letterSpacing: 2, textTransform: "uppercase", color: "#a5b4fc" }}>
+            <p className="text-xs tracking-[2px] uppercase text-accent">
               Digital Twin III
             </p>
-            <h1 style={{ fontSize: 24, margin: "4px 0" }}>Security Dashboard</h1>
-            <p style={{ fontSize: 13, color: "#9ca3af" }}>
+            <h1 className="text-2xl font-bold text-foreground mt-1 mb-1">Security Dashboard</h1>
+            <p className="text-[13px] text-muted-foreground">
               Real-time security telemetry from your live cyber lab over the last 24 hours.
             </p>
           </div>
           <a
             href="/"
-            style={{
-              padding: "8px 14px",
-              borderRadius: 999,
-              border: "1px solid #334155",
-              fontSize: 13,
-              color: "#e5e7eb",
-              textDecoration: "none",
-            }}
+            className="px-4 py-2 rounded-full border border-border text-sm text-foreground no-underline hover:border-primary/50 hover:text-primary transition-all"
           >
-            ← Back to site
+            {'← Back to site'}
           </a>
         </header>
 
         {/* Overview cards */}
-        <section style={{ marginBottom: 24 }}>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
-              gap: 12,
-            }}
-          >
+        <section className="mb-6">
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(160px,1fr))] gap-3">
             <MetricCard label="Total requests" value={events.length} description="Events logged (24h)" />
-            <MetricCard label="Allowed" value={allowed} description="Safe or challenged" accent="#22c55e" />
-            <MetricCard label="Blocked" value={blocked} description="High-risk stopped" accent="#ef4444" />
-            <MetricCard label="Rate limits" value={rateLimited} description="Excessive traffic" accent="#eab308" />
-            <MetricCard label="Bot detections" value={botDetections} description="Automated behaviour" accent="#38bdf8" />
-            <MetricCard label="Shield triggers" value={shieldTriggers} description="Threat detections" accent="#8b5cf6" />
-            <MetricCard label="Unique IPs" value={uniqueIps} description="Distinct sources" accent="#f97316" />
+            <MetricCard label="Allowed" value={allowed} description="Safe or challenged" accent="text-primary" />
+            <MetricCard label="Blocked" value={blocked} description="High-risk stopped" accent="text-destructive" />
+            <MetricCard label="Rate limits" value={rateLimited} description="Excessive traffic" accent="text-yellow-400" />
+            <MetricCard label="Bot detections" value={botDetections} description="Automated behaviour" accent="text-accent" />
+            <MetricCard label="Shield triggers" value={shieldTriggers} description="Threat detections" accent="text-violet-400" />
+            <MetricCard label="Unique IPs" value={uniqueIps} description="Distinct sources" accent="text-orange-400" />
           </div>
         </section>
 
         {/* Arcjet-specific view */}
-        <section style={{ marginBottom: 24 }}>
-          <h2 style={{ fontSize: 16, marginBottom: 8 }}>Arcjet edge protection</h2>
+        <section className="mb-6">
+          <h2 className="text-base font-semibold text-foreground mb-2">Arcjet edge protection</h2>
           {arcjetEvents.length === 0 ? (
-            <p style={{ fontSize: 13, color: "#9ca3af" }}>
+            <p className="text-[13px] text-muted-foreground">
               No Arcjet decisions have been logged in the last 24 hours yet. Generate traffic
               against the sandbox APIs or run basic scans to see edge firewall activity here.
             </p>
           ) : (
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
-                gap: 12,
-              }}
-            >
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(160px,1fr))] gap-3">
               <MetricCard
                 label="Arcjet blocks"
                 value={arcjetBlocks}
                 description="Requests stopped at the edge"
-                accent="#f97316"
+                accent="text-orange-400"
               />
               <MetricCard
                 label="Arcjet rate limits"
                 value={arcjetRateLimits}
                 description="Throttled abusive traffic"
-                accent="#eab308"
+                accent="text-yellow-400"
               />
               <MetricCard
                 label="Arcjet bot denials"
                 value={arcjetBots}
                 description="Bots and spoofed clients blocked"
-                accent="#38bdf8"
+                accent="text-accent"
               />
             </div>
           )}
         </section>
 
         {/* Threat mix */}
-        <section style={{ marginBottom: 24 }}>
-          <h2 style={{ fontSize: 16, marginBottom: 8 }}>Threat mix (last 24 hours)</h2>
+        <section className="mb-6">
+          <h2 className="text-base font-semibold text-foreground mb-2">{'Threat mix (last 24 hours)'}</h2>
           {events.length === 0 ? (
-            <p style={{ fontSize: 13, color: "#9ca3af" }}>
+            <p className="text-[13px] text-muted-foreground">
               No telemetry yet. Use the sandbox endpoints and security tools to generate
               real attack traffic, then refresh this page.
             </p>
           ) : (
-            <div
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: 8,
-              }}
-            >
+            <div className="flex flex-wrap gap-2">
               {Object.entries(threatsByType).map(([type, count]) => (
                 <div
                   key={type}
-                  style={{
-                    padding: "6px 10px",
-                    borderRadius: 999,
-                    border: "1px solid #1f2937",
-                    background: "#020617",
-                    fontSize: 12,
-                    color: "#e5e7eb",
-                  }}
+                  className="px-3 py-1.5 rounded-full border border-border bg-card text-xs text-foreground"
                 >
-                  <span style={{ opacity: 0.75 }}>{type}</span>
-                  <span style={{ marginLeft: 8, color: "#a5b4fc" }}>×{count}</span>
+                  <span className="opacity-75">{type}</span>
+                  <span className="ml-2 text-accent">{'×'}{count}</span>
                 </div>
               ))}
             </div>
@@ -212,41 +174,29 @@ export default async function DashboardPage() {
         </section>
 
         {/* Active alerts */}
-        <section style={{ marginBottom: 24 }}>
-          <h2 style={{ fontSize: 16, marginBottom: 8 }}>Active alerts</h2>
-          <div
-            style={{
-              borderRadius: 16,
-              border: "1px solid #1f2937",
-              background: "#020617",
-              padding: 16,
-            }}
-          >
+        <section className="mb-6">
+          <h2 className="text-base font-semibold text-foreground mb-2">Active alerts</h2>
+          <div className="rounded-2xl border border-border bg-card p-4">
             {activeAlerts.length === 0 ? (
-              <p style={{ fontSize: 13, color: "#9ca3af" }}>
+              <p className="text-[13px] text-muted-foreground">
                 No active security alerts. Your application is stable under current traffic.
               </p>
             ) : (
-              <ul style={{ listStyle: "none", padding: 0, margin: 0, fontSize: 13 }}>
+              <ul className="list-none p-0 m-0 text-[13px]">
                 {activeAlerts.map((e) => (
                   <li
                     key={e.id}
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      padding: "8px 0",
-                      borderBottom: "1px solid #111827",
-                    }}
+                    className="flex justify-between py-2 border-b border-secondary last:border-b-0"
                   >
                     <div>
-                      <div>
-                        <strong>{e.severity}</strong> · {e.threat_type || e.event_type}
+                      <div className="text-foreground">
+                        <strong>{e.severity}</strong> {'·'} {e.threat_type || e.event_type}
                       </div>
-                      <div style={{ color: "#9ca3af" }}>
-                        {e.endpoint} · {new Date(e.timestamp).toLocaleString()}
+                      <div className="text-muted-foreground">
+                        {e.endpoint} {'·'} {new Date(e.timestamp).toLocaleString()}
                       </div>
                     </div>
-                    <div style={{ fontSize: 12, color: "#9ca3af" }}>{e.source_ip || "-"}</div>
+                    <div className="text-xs text-muted-foreground">{e.source_ip || "-"}</div>
                   </li>
                 ))}
               </ul>
@@ -255,55 +205,36 @@ export default async function DashboardPage() {
         </section>
 
         {/* Recent activity table */}
-        <section style={{ marginBottom: 24 }}>
-          <h2 style={{ fontSize: 16, marginBottom: 8 }}>Recent activity</h2>
+        <section className="mb-6">
+          <h2 className="text-base font-semibold text-foreground mb-2">Recent activity</h2>
           {events.length === 0 ? (
-            <p style={{ fontSize: 13, color: "#9ca3af" }}>No recent events.</p>
+            <p className="text-[13px] text-muted-foreground">No recent events.</p>
           ) : (
-            <div
-              style={{
-                borderRadius: 16,
-                border: "1px solid #1f2937",
-                overflow: "hidden",
-                background: "#020617",
-              }}
-            >
-              <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12 }}>
-                <thead style={{ background: "#020617" }}>
+            <div className="rounded-2xl border border-border overflow-hidden bg-card">
+              <table className="w-full border-collapse text-xs">
+                <thead className="bg-card">
                   <tr>
-                    <th style={{ textAlign: "left", padding: 8, borderBottom: "1px solid #111827" }}>
-                      Time
-                    </th>
-                    <th style={{ textAlign: "left", padding: 8, borderBottom: "1px solid #111827" }}>
-                      Type
-                    </th>
-                    <th style={{ textAlign: "left", padding: 8, borderBottom: "1px solid #111827" }}>
-                      Severity
-                    </th>
-                    <th style={{ textAlign: "left", padding: 8, borderBottom: "1px solid #111827" }}>
-                      Action
-                    </th>
-                    <th style={{ textAlign: "left", padding: 8, borderBottom: "1px solid #111827" }}>
-                      Endpoint
-                    </th>
-                    <th style={{ textAlign: "left", padding: 8, borderBottom: "1px solid #111827" }}>
-                      IP
-                    </th>
+                    <th className="text-left p-2 border-b border-secondary text-muted-foreground font-medium">Time</th>
+                    <th className="text-left p-2 border-b border-secondary text-muted-foreground font-medium">Type</th>
+                    <th className="text-left p-2 border-b border-secondary text-muted-foreground font-medium">Severity</th>
+                    <th className="text-left p-2 border-b border-secondary text-muted-foreground font-medium">Action</th>
+                    <th className="text-left p-2 border-b border-secondary text-muted-foreground font-medium">Endpoint</th>
+                    <th className="text-left p-2 border-b border-secondary text-muted-foreground font-medium">IP</th>
                   </tr>
                 </thead>
                 <tbody>
                   {events.map((e) => (
-                    <tr key={e.id}>
-                      <td style={{ padding: 8, borderBottom: "1px solid #111827" }}>
+                    <tr key={e.id} className="hover:bg-secondary/30 transition-colors">
+                      <td className="p-2 border-b border-secondary/50 text-foreground">
                         {new Date(e.timestamp).toLocaleString()}
                       </td>
-                      <td style={{ padding: 8, borderBottom: "1px solid #111827" }}>
+                      <td className="p-2 border-b border-secondary/50 text-foreground">
                         {e.threat_type || e.event_type}
                       </td>
-                      <td style={{ padding: 8, borderBottom: "1px solid #111827" }}>{e.severity}</td>
-                      <td style={{ padding: 8, borderBottom: "1px solid #111827" }}>{e.action}</td>
-                      <td style={{ padding: 8, borderBottom: "1px solid #111827" }}>{e.endpoint}</td>
-                      <td style={{ padding: 8, borderBottom: "1px solid #111827" }}>{e.source_ip || "-"}</td>
+                      <td className="p-2 border-b border-secondary/50 text-foreground">{e.severity}</td>
+                      <td className="p-2 border-b border-secondary/50 text-foreground">{e.action}</td>
+                      <td className="p-2 border-b border-secondary/50 text-foreground">{e.endpoint}</td>
+                      <td className="p-2 border-b border-secondary/50 text-muted-foreground">{e.source_ip || "-"}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -314,15 +245,14 @@ export default async function DashboardPage() {
 
         {/* Evidence link */}
         <section>
-          <h2 style={{ fontSize: 16, marginBottom: 8 }}>Evidence & reports</h2>
-          <p style={{ fontSize: 13, color: "#9ca3af" }}>
-            Detailed logs, risk assessments, and remediation notes are maintained in
-            {" "}
+          <h2 className="text-base font-semibold text-foreground mb-2">{'Evidence & reports'}</h2>
+          <p className="text-[13px] text-muted-foreground leading-relaxed">
+            Detailed logs, risk assessments, and remediation notes are maintained in{" "}
             <a
               href="https://github.com/ashmin7/digital-twin-DigitalMind/blob/main/docs/security-evidence.md"
               target="_blank"
               rel="noreferrer"
-              style={{ color: "#38bdf8" }}
+              className="text-accent hover:underline"
             >
               docs/security-evidence.md
             </a>
@@ -342,19 +272,12 @@ interface MetricCardProps {
   accent?: string;
 }
 
-function MetricCard({ label, value, description, accent = "#38bdf8" }: MetricCardProps) {
+function MetricCard({ label, value, description, accent = "text-accent" }: MetricCardProps) {
   return (
-    <div
-      style={{
-        borderRadius: 16,
-        padding: 12,
-        border: "1px solid #1f2937",
-        background: "linear-gradient(135deg, rgba(56,189,248,0.12), rgba(15,23,42,0.95))",
-      }}
-    >
-      <div style={{ fontSize: 12, color: "#9ca3af", marginBottom: 4 }}>{label}</div>
-      <div style={{ fontSize: 24, fontWeight: 600, color: accent }}>{value}</div>
-      <div style={{ fontSize: 12, color: "#9ca3af" }}>{description}</div>
+    <div className="rounded-2xl p-3 border border-border bg-[linear-gradient(135deg,rgba(56,189,248,0.12),rgba(15,23,42,0.95))]">
+      <div className="text-xs text-muted-foreground mb-1">{label}</div>
+      <div className={`text-2xl font-semibold ${accent}`}>{value}</div>
+      <div className="text-xs text-muted-foreground">{description}</div>
     </div>
   );
 }

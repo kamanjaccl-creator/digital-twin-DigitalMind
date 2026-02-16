@@ -33,10 +33,9 @@ export default async function DashboardPage() {
     return (
       <div className="cyber-bg">
         <SiteHeader />
-        <main className="container-md" style={{ paddingTop: 40, paddingBottom: 48 }}>
-          <p className="section-label">Security Dashboard</p>
-          <h1 className="section-title">Security Dashboard</h1>
-          <p className="section-desc">
+        <main className="container-md" style={{ paddingTop: 40, paddingBottom: 40 }}>
+          <h1 style={{ fontSize: 24, fontWeight: 700, marginBottom: 16 }}>Security Dashboard</h1>
+          <p style={{ color: "var(--fg-muted)", fontSize: 14, lineHeight: 1.7 }}>
             Supabase is not configured. Set{" "}
             <code style={{ color: "var(--accent)", fontFamily: "var(--font-mono)", fontSize: 12 }}>NEXT_PUBLIC_SUPABASE_URL</code>{" "}
             and{" "}
@@ -79,11 +78,10 @@ export default async function DashboardPage() {
   return (
     <div className="cyber-bg">
       <SiteHeader />
-      <main className="container" style={{ paddingTop: 32, paddingBottom: 48 }}>
+      <main className="container" style={{ paddingTop: 32, paddingBottom: 40 }}>
         <header style={{ marginBottom: 24 }}>
-          <p className="section-label">Security Operations</p>
-          <h1 className="section-title">Security Dashboard</h1>
-          <p className="section-desc">Real-time security telemetry from your live cyber lab (last 24h).</p>
+          <h1 style={{ fontSize: 24, fontWeight: 700, marginBottom: 6 }}>Security Dashboard</h1>
+          <p style={{ color: "var(--fg-muted)", fontSize: 14 }}>Real-time security telemetry from your live cyber lab (last 24h).</p>
         </header>
 
         {/* Stat cards row */}
@@ -100,13 +98,10 @@ export default async function DashboardPage() {
         </section>
 
         {/* Arcjet */}
-        <section className="page-section">
-          <div className="page-section-header">
-            <span className="page-section-dot" />
-            <h2 style={{ fontSize: 16, fontWeight: 600, color: "var(--fg)", margin: 0 }}>Arcjet edge protection</h2>
-          </div>
+        <section style={{ marginBottom: 28 }}>
+          <h2 style={{ fontSize: 18, fontWeight: 600, marginBottom: 12 }}>Arcjet edge protection</h2>
           {arcjetEvents.length === 0 ? (
-            <p className="section-desc">No Arcjet decisions in the last 24 hours. Generate traffic to see edge firewall activity.</p>
+            <p style={{ color: "var(--fg-muted)", fontSize: 14 }}>No Arcjet decisions in the last 24 hours. Generate traffic to see edge firewall activity.</p>
           ) : (
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(155px, 1fr))", gap: 12 }}>
               <MetricCard label="Arcjet blocks" value={arcjetBlocks} desc="Stopped at edge" color="#fb923c" />
@@ -117,13 +112,10 @@ export default async function DashboardPage() {
         </section>
 
         {/* Threat mix */}
-        <section className="page-section">
-          <div className="page-section-header">
-            <span className="page-section-dot" />
-            <h2 style={{ fontSize: 16, fontWeight: 600, color: "var(--fg)", margin: 0 }}>Threat mix (last 24 hours)</h2>
-          </div>
+        <section style={{ marginBottom: 28 }}>
+          <h2 style={{ fontSize: 18, fontWeight: 600, marginBottom: 12 }}>Threat mix (last 24 hours)</h2>
           {events.length === 0 ? (
-            <p className="section-desc">No telemetry yet. Use sandbox endpoints to generate attack traffic.</p>
+            <p style={{ color: "var(--fg-muted)", fontSize: 14 }}>No telemetry yet. Use sandbox endpoints to generate attack traffic.</p>
           ) : (
             <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
               {Object.entries(threatsByType).map(([type, count]) => (
@@ -136,14 +128,11 @@ export default async function DashboardPage() {
         </section>
 
         {/* Alerts */}
-        <section className="page-section">
-          <div className="page-section-header">
-            <span className="page-section-dot" />
-            <h2 style={{ fontSize: 16, fontWeight: 600, color: "var(--fg)", margin: 0 }}>Active alerts</h2>
-          </div>
+        <section style={{ marginBottom: 28 }}>
+          <h2 style={{ fontSize: 18, fontWeight: 600, marginBottom: 12 }}>Active alerts</h2>
           <div className="card">
             {activeAlerts.length === 0 ? (
-              <p className="section-desc" style={{ maxWidth: "none" }}>No active security alerts. Application stable under current traffic.</p>
+              <p style={{ color: "var(--fg-muted)", fontSize: 14 }}>No active security alerts. Application stable under current traffic.</p>
             ) : (
               <ul style={{ listStyle: "none", padding: 0, margin: 0, fontSize: 13 }}>
                 {activeAlerts.map((e) => (
@@ -161,13 +150,10 @@ export default async function DashboardPage() {
         </section>
 
         {/* Recent activity */}
-        <section className="page-section">
-          <div className="page-section-header">
-            <span className="page-section-dot" />
-            <h2 style={{ fontSize: 16, fontWeight: 600, color: "var(--fg)", margin: 0 }}>Recent activity</h2>
-          </div>
+        <section style={{ marginBottom: 28 }}>
+          <h2 style={{ fontSize: 18, fontWeight: 600, marginBottom: 12 }}>Recent activity</h2>
           {events.length === 0 ? (
-            <p className="section-desc">No recent events.</p>
+            <p style={{ color: "var(--fg-muted)", fontSize: 14 }}>No recent events.</p>
           ) : (
             <div style={{ borderRadius: "var(--radius)", border: "1px solid var(--border)", overflow: "hidden", background: "var(--bg-card)" }}>
               <table className="data-table">
@@ -194,12 +180,9 @@ export default async function DashboardPage() {
         </section>
 
         {/* Evidence */}
-        <section className="page-section">
-          <div className="page-section-header">
-            <span className="page-section-dot" />
-            <h2 style={{ fontSize: 16, fontWeight: 600, color: "var(--fg)", margin: 0 }}>{"Evidence & reports"}</h2>
-          </div>
-          <p className="section-desc">
+        <section>
+          <h2 style={{ fontSize: 18, fontWeight: 600, marginBottom: 12 }}>{"Evidence & reports"}</h2>
+          <p style={{ color: "var(--fg-muted)", fontSize: 14, lineHeight: 1.7 }}>
             Detailed logs, risk assessments, and remediation notes are maintained in{" "}
             <a href="https://github.com/ashmin7/digital-twin-DigitalMind/blob/main/docs/security-evidence.md" target="_blank" rel="noreferrer">
               docs/security-evidence.md

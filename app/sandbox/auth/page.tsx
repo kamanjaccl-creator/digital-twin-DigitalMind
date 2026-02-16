@@ -30,10 +30,9 @@ export default function AuthSandboxPage() {
   return (
     <div className="cyber-bg">
       <SiteHeader />
-      <main className="container-sm" style={{ paddingTop: 40, paddingBottom: 48 }}>
-        <p className="section-label">Sandbox</p>
-        <h1 className="section-title" style={{ fontSize: 24 }}>{"Authentication & Access Control"}</h1>
-        <p className="section-desc" style={{ marginBottom: 24 }}>
+      <main className="container-sm" style={{ paddingTop: 40, paddingBottom: 40 }}>
+        <h1 style={{ fontSize: 22, fontWeight: 700, marginBottom: 10 }}>{"Authentication & Access Control Sandbox"}</h1>
+        <p style={{ color: "var(--fg-muted)", fontSize: 14, lineHeight: 1.7, marginBottom: 20 }}>
           Simulates an admin-only API at{" "}
           <code style={{ color: "var(--accent)", fontFamily: "var(--font-mono)", fontSize: 12 }}>/api/admin/secret</code>.
           Requests without the correct token are logged as{" "}

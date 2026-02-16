@@ -40,10 +40,9 @@ export default function SandboxRateLimit() {
   return (
     <div className="cyber-bg">
       <SiteHeader />
-      <main className="container-sm" style={{ paddingTop: 40, paddingBottom: 48 }}>
-        <p className="section-label">Sandbox</p>
-        <h1 className="section-title" style={{ fontSize: 24 }}>Automated / Bot Traffic</h1>
-        <p className="section-desc" style={{ marginBottom: 24 }}>
+      <main className="container-sm" style={{ paddingTop: 40, paddingBottom: 40 }}>
+        <h1 style={{ fontSize: 22, fontWeight: 700, marginBottom: 10 }}>Automated / Bot Traffic Sandbox</h1>
+        <p style={{ color: "var(--fg-muted)", fontSize: 14, lineHeight: 1.7, marginBottom: 20 }}>
           Sends a burst of requests to{" "}
           <code style={{ color: "var(--accent)", fontFamily: "var(--font-mono)", fontSize: 12 }}>/api/sandbox/rate-limit</code>{" "}
           to simulate scanner or bot behaviour. The backend applies rate limiting and logs events.

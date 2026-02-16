@@ -45,10 +45,9 @@ export default function SandboxSQL() {
   return (
     <div className="cyber-bg">
       <SiteHeader />
-      <main className="container-sm" style={{ paddingTop: 40, paddingBottom: 48 }}>
-        <p className="section-label">Sandbox</p>
-        <h1 className="section-title" style={{ fontSize: 24 }}>SQL Injection</h1>
-        <p className="section-desc" style={{ marginBottom: 24 }}>
+      <main className="container-sm" style={{ paddingTop: 40, paddingBottom: 40 }}>
+        <h1 style={{ fontSize: 22, fontWeight: 700, marginBottom: 10 }}>SQL Injection Sandbox</h1>
+        <p style={{ color: "var(--fg-muted)", fontSize: 14, lineHeight: 1.7, marginBottom: 20 }}>
           Try common SQL payloads. The backend runs detection, logs events, and shows whether the input would be blocked.
         </p>
 

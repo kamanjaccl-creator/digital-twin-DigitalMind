@@ -1,4 +1,5 @@
 import SiteHeader from "../../components/site-header";
+import SiteFooter from "../../components/site-footer";
 
 export default function ThreatsPage() {
   const threats = [
@@ -19,25 +20,27 @@ export default function ThreatsPage() {
   return (
     <div className="cyber-bg">
       <SiteHeader />
-      <main className="container-md" style={{ paddingTop: 40, paddingBottom: 40 }}>
-        <h1 style={{ fontSize: 24, fontWeight: 700, marginBottom: 16 }}>Threats you train against</h1>
-        <p style={{ color: "var(--fg-muted)", fontSize: 14, lineHeight: 1.7, marginBottom: 24 }}>
+      <main className="container-md" style={{ paddingTop: 40, paddingBottom: 48 }}>
+        <p className="section-label">Threat Intelligence</p>
+        <h1 className="section-title">Threats you train against</h1>
+        <p className="section-desc" style={{ marginBottom: 24 }}>
           This lab is designed around the most common and high-impact web application threats.
           Each category is instrumented so you can attack it safely and see how the system responds.
         </p>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
           {threats.map((t) => (
-            <div key={t.title} className="link-card">
-              <h2 style={{ fontSize: 16, fontWeight: 600, marginBottom: 8 }}>{t.title}</h2>
-              <p style={{ color: "var(--fg-muted)", fontSize: 13, lineHeight: 1.6, margin: 0 }}>{t.desc}</p>
+            <div key={t.title} className="feature-card">
+              <h3>{t.title}</h3>
+              <p>{t.desc}</p>
             </div>
           ))}
         </div>
-        <p style={{ color: "var(--fg-muted)", fontSize: 14, lineHeight: 1.7, marginTop: 24 }}>
+        <p className="section-desc" style={{ marginTop: 24 }}>
           Combined with the security dashboard, this page helps you explain exactly what kinds of
           behaviour your system is meant to withstand.
         </p>
       </main>
+      <SiteFooter />
     </div>
   );
 }

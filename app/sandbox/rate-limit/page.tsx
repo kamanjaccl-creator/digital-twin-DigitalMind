@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import SiteHeader from "../../../components/site-header";
+import SiteFooter from "../../../components/site-footer";
 
 interface BurstResult {
   lastStatus: number | null;
@@ -39,9 +40,10 @@ export default function SandboxRateLimit() {
   return (
     <div className="cyber-bg">
       <SiteHeader />
-      <main className="container-sm" style={{ paddingTop: 40, paddingBottom: 40 }}>
-        <h1 style={{ fontSize: 24, fontWeight: 700, marginBottom: 8 }}>Sandbox: Automated / Bot Traffic</h1>
-        <p style={{ color: "var(--fg-muted)", fontSize: 14, lineHeight: 1.7, marginBottom: 24 }}>
+      <main className="container-sm" style={{ paddingTop: 40, paddingBottom: 48 }}>
+        <p className="section-label">Sandbox</p>
+        <h1 className="section-title" style={{ fontSize: 24 }}>Automated / Bot Traffic</h1>
+        <p className="section-desc" style={{ marginBottom: 24 }}>
           Sends a burst of requests to{" "}
           <code style={{ color: "var(--accent)", fontFamily: "var(--font-mono)", fontSize: 12 }}>/api/sandbox/rate-limit</code>{" "}
           to simulate scanner or bot behaviour. The backend applies rate limiting and logs events.
@@ -53,12 +55,12 @@ export default function SandboxRateLimit() {
 
         {result && (
           <div className="card" style={{ marginTop: 24 }}>
-            <p style={{ fontSize: 14 }}><strong>Total requests:</strong> {result.totalRequests}</p>
-            <p style={{ fontSize: 14, marginTop: 4 }}>
+            <p style={{ fontSize: 14, color: "var(--fg)" }}><strong>Total requests:</strong> {result.totalRequests}</p>
+            <p style={{ fontSize: 14, marginTop: 4, color: "var(--fg)" }}>
               <strong>Rate-limited:</strong>{" "}
               <span style={{ color: result.limitedCount > 0 ? "var(--destructive)" : "var(--primary)" }}>{result.limitedCount}</span>
             </p>
-            <p style={{ fontSize: 14, marginTop: 4 }}><strong>Last status:</strong> {result.lastStatus ?? "n/a"}</p>
+            <p style={{ fontSize: 14, marginTop: 4, color: "var(--fg)" }}><strong>Last status:</strong> {result.lastStatus ?? "n/a"}</p>
             {result.lastMessage && <p style={{ fontSize: 14, color: "var(--fg-muted)", marginTop: 8 }}>{result.lastMessage}</p>}
           </div>
         )}
@@ -67,6 +69,7 @@ export default function SandboxRateLimit() {
           {"Educational note: rate limits combine with Arcjet's edge protections to slow automated recon, credential stuffing, and noisy bot traffic."}
         </p>
       </main>
+      <SiteFooter />
     </div>
   );
 }

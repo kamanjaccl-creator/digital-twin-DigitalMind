@@ -3,49 +3,207 @@
 import SiteHeader from "../components/site-header";
 import SiteFooter from "../components/site-footer";
 
+const features = [
+  {
+    num: "01",
+    title: "Real-time Threat Detection",
+    desc: "Detects SQL injection, XSS, prompt injection, and bot attacks in real-time with severity classification.",
+  },
+  {
+    num: "02",
+    title: "AI-Driven Interactions",
+    desc: "Conversational persona agent answers questions about skills, experience, and portfolio content.",
+  },
+  {
+    num: "03",
+    title: "Security Dashboard",
+    desc: "Visualises attack patterns, blocked threats, and system performance with real-time updates.",
+  },
+  {
+    num: "04",
+    title: "Audit Logging",
+    desc: "All security events are logged for transparency, accountability, and compliance.",
+  },
+];
+
+const agents = [
+  {
+    name: "DigitalTwinPersona",
+    status: "active" as const,
+    desc: "Interactive digital twin representing professional identity",
+    caps: [
+      "Maintain concise, approachable, and informative responses",
+      "Provide professional guidance and contact info",
+      "Answer questions about skills, projects, and certifications",
+    ],
+    model: "GPT-4 Turbo",
+    temp: "0.7",
+  },
+  {
+    name: "SecurityGuardian",
+    status: "active" as const,
+    desc: "Detects threats and protects the portfolio from malicious inputs",
+    caps: [
+      "Provide recommended action: ALLOW, BLOCK, CHALLENGE",
+      "Assign severity (LOW, MEDIUM, HIGH, CRITICAL)",
+      "Detect SQL injection, XSS, prompt injections, bot attacks",
+    ],
+    model: "GPT-4 Turbo",
+    temp: "0.1",
+  },
+  {
+    name: "ContentCreator",
+    status: "standby" as const,
+    desc: "Generates and manages blog posts and project documentation",
+    caps: [
+      "Support MCP tools for automation",
+      "Maintain consistent branding and technical accuracy",
+      "Create, update, and summarise content in markdown",
+    ],
+    model: "GPT-4 Turbo",
+    temp: "0.8",
+  },
+  {
+    name: "ThreatAnalytics",
+    status: "active" as const,
+    desc: "Aggregates and analyses security events for actionable insights",
+    caps: [
+      "Predict potential future threats",
+      "Generate dashboards and reports",
+      "Compute threat metrics and trends",
+    ],
+    model: "GPT-4 Turbo",
+    temp: "0.5",
+  },
+  {
+    name: "AuditLogger",
+    status: "active" as const,
+    desc: "Logs and monitors all security-related events",
+    caps: [
+      "Send real-time notifications for critical events",
+      "Store events in Supabase",
+      "Sanitise sensitive data before logging",
+    ],
+    model: "System",
+    temp: "0",
+  },
+];
+
+const projects = [
+  {
+    title: "Portfolio Hardening System",
+    desc: "Cyber-hardened portfolio with AI agents and real-time security monitoring. Implements OWASP Top 10 best practices with multi-layer defence architecture.",
+    features: ["Real-time threat detection", "AI-powered chatbot", "Security dashboard", "Audit logging"],
+    tags: ["Next.js 16", "TypeScript", "Supabase", "Vercel"],
+  },
+  {
+    title: "MCP Server Architecture",
+    desc: "Model Context Protocol implementation enabling AI agents to interact with external tools, databases, and services with secure tool calling.",
+    features: ["Security Monitor Server", "Content Manager Server", "Threat Intelligence Server", "Tool orchestration"],
+    tags: ["TypeScript", "OpenAI", "Supabase", "Node.js"],
+  },
+  {
+    title: "Security Event Pipeline",
+    desc: "Structured logging and event pipeline for capturing, analysing, and responding to security threats with real-time notifications.",
+    features: ["Event classification", "Severity scoring", "IP reputation checks", "Automated blocking"],
+    tags: ["PostgreSQL", "Supabase Realtime", "Zod"],
+  },
+  {
+    title: "Threat Detection API",
+    desc: "Multi-layer API security with rate limiting, WAF integration, input validation, and bot detection using Arcjet and custom middleware.",
+    features: ["SQL injection detection", "XSS prevention", "Rate limiting", "Bot mitigation"],
+    tags: ["Next.js API", "Arcjet", "Zod"],
+  },
+];
+
+const team = [
+  {
+    initials: "AA",
+    name: "Ashmin Aryal",
+    role: "Team Lead / STAR File Author",
+    color: "rgba(56, 189, 248, 0.15)",
+    contributions: [
+      "Documentation and team management",
+      "Project architecture and workflow coordination",
+      "Created consolidated star.json including metadata, sample content, and agent configurations",
+    ],
+  },
+  {
+    initials: "VK",
+    name: "Victor Kamanja",
+    role: "Frontend Developer / PRD Author",
+    color: "rgba(34, 197, 94, 0.15)",
+    contributions: [
+      "Risk and mitigation strategies documentation",
+      "Frontend UI/UX implementation",
+      "Defined project requirements and technical specifications",
+    ],
+  },
+  {
+    initials: "PW",
+    name: "Phuntshok Wangdruk",
+    role: "Backend Developer / Agents Developer",
+    color: "rgba(168, 85, 247, 0.15)",
+    contributions: [
+      "MCP server implementation",
+      "Backend API and security infrastructure",
+      "Developed AI agents including Persona and Security Guardian",
+    ],
+  },
+];
+
+const techStack = [
+  "Next.js 16",
+  "React Framework",
+  "Supabase",
+  "PostgreSQL + Auth",
+  "Vercel",
+  "Edge Deployment",
+  "OpenAI",
+  "AI Integration",
+  "WAF",
+  "Web Security",
+  "TypeScript",
+  "Type Safety",
+];
+
 export default function Home() {
   return (
     <div className="cyber-bg">
       <SiteHeader />
 
-      <main className="container" style={{ paddingTop: 32, paddingBottom: 40 }}>
+      <main className="container" style={{ paddingTop: 40, paddingBottom: 48 }}>
         {/* Hero */}
-        <section style={{ display: "flex", flexWrap: "wrap", gap: 32, alignItems: "stretch", marginBottom: 40 }}>
-          <div style={{ flex: "1 1 260px" }}>
-            <p style={{ fontSize: 11, letterSpacing: 2, color: "var(--accent)", textTransform: "uppercase" }}>
-              Cyber-Hardened Portfolio
+        <section style={{ display: "flex", flexWrap: "wrap", gap: 32, alignItems: "stretch", marginBottom: 56 }}>
+          <div style={{ flex: "1 1 320px" }}>
+            <p className="section-label">System Active</p>
+            <h1 style={{ fontSize: 38, fontWeight: 700, marginTop: 8, marginBottom: 6, lineHeight: 1.2 }}>
+              Digital Twin III
+              <br />
+              <span style={{ color: "var(--accent)" }}>Cyber-Hardened</span>
+              <br />
+              Portfolio
+            </h1>
+            <p className="section-desc" style={{ marginBottom: 20 }}>
+              A cyber-secured, monitored, and attack-resilient digital asset demonstrating
+              real-world threat defence capabilities with integrated AI agents.
             </p>
-            <h1 style={{ fontSize: 34, fontWeight: 700, marginTop: 8, marginBottom: 6 }}>DigitalMind</h1>
-            <p style={{ color: "var(--fg-muted)", fontSize: 14, maxWidth: 560, marginBottom: 10, lineHeight: 1.7 }}>
-              A secure, cloud-deployed AI portfolio developed through teamwork and real-world
-              testing. This Digital Twin is more than a website — it is a live hacking lab where
-              you can safely attack defined surfaces and watch the detections appear in real time.
-            </p>
-            <p style={{ color: "var(--fg-muted)", fontSize: 14, maxWidth: 560, marginBottom: 10, lineHeight: 1.7 }}>
-              Built within an industry-aligned program, it showcases cloud deployment,
-              cybersecurity engineering, and collaborative software development using
-              modern AI tools.
-            </p>
-            <p style={{ fontSize: 13, fontWeight: 500 }}>
-              Secure. Monitored. Production-ready. Built to be tested, attacked, and improved.
-            </p>
-            <div style={{ marginTop: 18, display: "flex", gap: 12, flexWrap: "wrap" }}>
-              <a href="/#sandbox" className="btn-primary">Explore attack sandbox</a>
-              <a href="/dashboard" className="btn-outline">View security dashboard</a>
-              <a href="/lab" className="btn-outline">Read case study</a>
+            <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+              <a href="/#projects" className="btn-primary">View Projects</a>
+              <a href="/chat" className="btn-outline">Talk to Digital Twin</a>
             </div>
           </div>
 
-          {/* Right card */}
+          {/* Status card */}
           <div
             style={{
-              flexBasis: 290,
+              flexBasis: 300,
               flexGrow: 0,
               flexShrink: 0,
               borderRadius: 20,
-              padding: 18,
-              background: "radial-gradient(circle at top, rgba(56,189,248,0.25), transparent 60%), var(--bg-card)",
-              border: "1px solid rgba(30,41,59,0.5)",
+              padding: 20,
+              background: "radial-gradient(circle at top, rgba(56,189,248,0.2), transparent 60%), var(--bg-card)",
+              border: "1px solid var(--border)",
               display: "flex",
               flexDirection: "column",
               gap: 14,
@@ -53,88 +211,192 @@ export default function Home() {
           >
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <div>
-                <p style={{ fontSize: 11, color: "var(--accent)", margin: 0 }}>Live Lab</p>
-                <p style={{ fontSize: 14, fontWeight: 600, margin: 0 }}>Attack surface summary</p>
+                <p style={{ fontSize: 11, color: "var(--fg-muted)", margin: 0 }}>DIGITALMIND TEAM</p>
+                <span className="badge badge-online" style={{ marginTop: 4, display: "inline-block" }}>Online</span>
               </div>
-              <span className="badge badge-online">Online</span>
             </div>
             <div style={{ borderRadius: 14, background: "rgba(11,18,37,0.9)", padding: 14, fontSize: 13 }}>
-              <ul style={{ margin: 0, paddingLeft: 18 }}>
-                <li>Target SQL injection, XSS, and auth flows in safe sandboxes.</li>
-                <li style={{ marginTop: 4 }}>Every attempt is logged into the Supabase-backed security dashboard.</li>
-                <li style={{ marginTop: 4 }}>Use your own testing tools and payloads — this lab is built to be attacked.</li>
-              </ul>
+              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
+                <span style={{ color: "var(--fg-muted)" }}>STATUS</span>
+                <span style={{ color: "var(--primary)", fontWeight: 600 }}>OPERATIONAL</span>
+              </div>
+              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
+                <span style={{ color: "var(--fg-muted)" }}>ACCESS LEVEL</span>
+                <span style={{ color: "var(--fg)", fontWeight: 600 }}>PUBLIC</span>
+              </div>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <span style={{ color: "var(--fg-muted)" }}>THREAT DETECTION</span>
+                <span style={{ color: "var(--primary)", fontWeight: 600 }}>ACTIVE</span>
+              </div>
             </div>
-            <a
-              href="/dashboard"
-              className="btn-outline"
-              style={{ marginTop: "auto", display: "flex", justifyContent: "space-between", fontSize: 12 }}
-            >
-              <span>Open security dashboard</span>
-              <span>{">"}</span>
-            </a>
+            <div style={{ display: "flex", gap: 8, flexWrap: "wrap", fontSize: 11 }}>
+              <span className="tech-badge">WAF Protection ENABLED</span>
+              <span className="tech-badge">AI Agents 5 ONLINE</span>
+            </div>
           </div>
         </section>
 
         {/* About */}
-        <section id="about" style={{ marginBottom: 32, scrollMarginTop: 80 }}>
-          <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 10 }}>What this Digital Twin represents</h2>
-          <p style={{ color: "var(--fg-muted)", fontSize: 14, lineHeight: 1.7, marginBottom: 8 }}>
-            Every production web app is a target. This Digital Twin turns that risk into a
-            teaching tool: a controlled cyber range where you can deliberately attack, observe
-            detections and blocks, practise incident response, and document how you harden the
-            system release by release.
+        <section id="about" className="page-section" style={{ marginBottom: 56 }}>
+          <p className="section-label">About the Project</p>
+          <h2 className="section-title">Transforming portfolios into cyber-resilient assets</h2>
+          <p className="section-desc" style={{ marginBottom: 12 }}>
+            The Digital Twin III project demonstrates a professional portfolio that is both visually
+            appealing and cyber-resilient. It detects and blocks real cyber threats in real-time
+            while analysing attacker behaviour and generating actionable insights.
           </p>
-          <p style={{ color: "var(--fg-muted)", fontSize: 14, lineHeight: 1.7 }}>
-            For hiring managers, this site is both a portfolio and a live security case study:
-            it hosts my professional identity and projects, exposes safe attack surfaces, and
-            shows how I manage security as an ongoing lifecycle instead of a one-time checkbox.
+          <p className="section-desc">
+            Built with enterprise-level security controls aligned with OWASP Top 10 best practices,
+            this portfolio serves as a showcase of cybersecurity expertise and modern web development.
           </p>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 20 }}>
+            {techStack.map((t) => (
+              <span key={t} className="tech-badge">{t}</span>
+            ))}
+          </div>
         </section>
 
-        {/* Threats */}
-        <section id="threats" style={{ marginBottom: 32, scrollMarginTop: 80 }}>
-          <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 10 }}>Threats you train against</h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
-            {[
-              { title: "Injection attacks", desc: "SQL injection, prompt injection, and malicious payloads." },
-              { title: "Auth & access control", desc: "Authentication failures, broken access control, privilege abuse." },
-              { title: "Bots & automation", desc: "Automated scanners, brute-force tools, and scripted attacks." },
-            ].map((t) => (
-              <div key={t.title} className="link-card">
-                <h3 style={{ fontSize: 15, fontWeight: 600, marginBottom: 6 }}>{t.title}</h3>
-                <p style={{ color: "var(--fg-muted)", fontSize: 13, margin: 0, lineHeight: 1.6 }}>{t.desc}</p>
+        {/* Key Features */}
+        <section className="page-section" style={{ marginBottom: 56 }}>
+          <p className="section-label">Key Features</p>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 16 }}>
+            {features.map((f) => (
+              <div key={f.num} className="feature-card">
+                <div className="feature-number">{f.num}</div>
+                <h3>{f.title}</h3>
+                <p>{f.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Projects */}
+        <section id="projects" className="page-section" style={{ marginBottom: 56, scrollMarginTop: 80 }}>
+          <p className="section-label">Projects</p>
+          <h2 className="section-title">Building secure systems</h2>
+          <p className="section-desc" style={{ marginBottom: 24 }}>
+            Each component of the Digital Twin III project demonstrates enterprise-level security
+            practices and modern development techniques.
+          </p>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 16 }}>
+            {projects.map((p) => (
+              <div key={p.title} className="project-card">
+                <h3>{p.title}</h3>
+                <p>{p.desc}</p>
+                <p style={{ fontSize: 11, fontWeight: 600, color: "var(--fg-muted)", textTransform: "uppercase", letterSpacing: 1, marginBottom: 8 }}>
+                  Key Features
+                </p>
+                <div className="project-features">
+                  {p.features.map((f) => (
+                    <span key={f}>{f}</span>
+                  ))}
+                </div>
+                <div className="project-tags">
+                  {p.tags.map((t) => (
+                    <span key={t} className="tech-badge">{t}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* AI Agents */}
+        <section className="page-section" style={{ marginBottom: 56 }}>
+          <p className="section-label">AI Agents Architecture</p>
+          <h2 className="section-title">Intelligent agents working in harmony</h2>
+          <p className="section-desc" style={{ marginBottom: 24 }}>
+            Multiple AI agents collaborate to provide an interactive, secure, and self-defending
+            portfolio experience using the Model Context Protocol (MCP).
+          </p>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 16 }}>
+            {agents.map((a) => (
+              <div key={a.name} className="agent-card">
+                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <span className={`agent-status ${a.status === "active" ? "agent-status-active" : "agent-status-standby"}`}>
+                    {a.status}
+                  </span>
+                </div>
+                <h3>{a.name}</h3>
+                <p className="agent-desc">{a.desc}</p>
+                <p style={{ fontSize: 11, fontWeight: 600, color: "var(--fg-muted)", textTransform: "uppercase", letterSpacing: 1 }}>
+                  Capabilities
+                </p>
+                <ul>
+                  {a.caps.map((c) => (
+                    <li key={c}>{c}</li>
+                  ))}
+                </ul>
+                <div className="agent-meta">
+                  Model: {a.model} &middot; Temp: {a.temp}
+                </div>
               </div>
             ))}
           </div>
         </section>
 
         {/* Sandbox */}
-        <section id="sandbox" style={{ marginBottom: 32, scrollMarginTop: 80 }}>
-          <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 10 }}>Hacking simulation sandbox</h2>
-          <p style={{ color: "var(--fg-muted)", fontSize: 14, lineHeight: 1.7 }}>
+        <section id="sandbox" className="page-section" style={{ marginBottom: 56, scrollMarginTop: 80 }}>
+          <p className="section-label">Security Operations</p>
+          <h2 className="section-title">Hacking simulation sandbox</h2>
+          <p className="section-desc" style={{ marginBottom: 20 }}>
             These live sandboxes are wired to real detection, logging, and rate limiting. You can
             safely try common attacks and then open the dashboard to observe how the system
             classified and handled your traffic.
           </p>
-          <ul style={{ fontSize: 14, marginTop: 14, listStyle: "none", padding: 0, display: "flex", flexDirection: "column", gap: 8 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 12 }}>
             {[
-              { href: "/sandbox/sql", label: "/sandbox/sql", desc: " — SQL injection payloads, detection, and safe query patterns." },
-              { href: "/sandbox/xss", label: "/sandbox/xss", desc: " — reflected XSS attempts, output encoding, and malicious payload detection." },
-              { href: "/sandbox/rate-limit", label: "/sandbox/rate-limit", desc: " — automated/bot-style traffic, scanners, and basic WAF-style rate limiting." },
-              { href: "/sandbox/auth", label: "/sandbox/auth", desc: " — authentication failures, broken access control, and privilege-abuse scenarios." },
+              { href: "/sandbox/sql", label: "SQL Injection", desc: "SQL injection payloads, detection, and safe query patterns." },
+              { href: "/sandbox/xss", label: "XSS Testing", desc: "Reflected XSS attempts, output encoding, and malicious payload detection." },
+              { href: "/sandbox/rate-limit", label: "Rate Limiting", desc: "Bot-style traffic, scanners, and WAF-style rate limiting." },
+              { href: "/sandbox/auth", label: "Auth Bypass", desc: "Authentication failures, broken access control, and privilege abuse scenarios." },
             ].map((s) => (
-              <li key={s.href}>
-                <a href={s.href} style={{ color: "var(--accent)" }}>{s.label}</a>
-                <span style={{ color: "var(--fg-muted)" }}>{s.desc}</span>
-              </li>
+              <a key={s.href} href={s.href} className="link-card" style={{ display: "block", textDecoration: "none" }}>
+                <h3 style={{ fontSize: 15, fontWeight: 600, color: "var(--fg)", marginBottom: 6 }}>{s.label}</h3>
+                <p style={{ color: "var(--fg-muted)", fontSize: 13, margin: 0, lineHeight: 1.6 }}>{s.desc}</p>
+              </a>
             ))}
-          </ul>
+          </div>
+          <div style={{ marginTop: 16, textAlign: "center" }}>
+            <a href="/dashboard" className="btn-outline">View Full Dashboard</a>
+          </div>
+        </section>
+
+        {/* Team */}
+        <section className="page-section" style={{ marginBottom: 56 }}>
+          <p className="section-label">The Team</p>
+          <h2 className="section-title">Meet DigitalMind Team</h2>
+          <p className="section-desc" style={{ marginBottom: 24 }}>
+            A collaborative team of developers passionate about cybersecurity, AI-assisted
+            development, and building secure web applications.
+          </p>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 16 }}>
+            {team.map((m) => (
+              <div key={m.initials} className="team-card">
+                <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
+                  <div className="team-avatar" style={{ background: m.color }}>{m.initials}</div>
+                  <div>
+                    <h3>{m.name}</h3>
+                    <p className="role">{m.role}</p>
+                  </div>
+                </div>
+                <p style={{ fontSize: 11, fontWeight: 600, color: "var(--fg-muted)", textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>
+                  Contributions
+                </p>
+                <ul>
+                  {m.contributions.map((c) => (
+                    <li key={c}>{c}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </section>
 
         {/* Stack */}
-        <section id="stack" style={{ marginBottom: 32, scrollMarginTop: 80 }}>
-          <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 10 }}>Security-focused stack behind the lab</h2>
+        <section id="stack" className="page-section" style={{ marginBottom: 48, scrollMarginTop: 80 }}>
+          <p className="section-label">Technology Stack</p>
+          <h2 className="section-title">Security-focused stack behind the lab</h2>
           <div
             style={{
               display: "grid",
@@ -143,114 +405,30 @@ export default function Home() {
             }}
           >
             {[
-              {
-                name: "Next.js (App Router)",
-                desc: "Modern, testable, security-first frontend",
-                icon: (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="16 18 22 12 16 6" />
-                    <polyline points="8 6 2 12 8 18" />
-                  </svg>
-                ),
-              },
-              {
-                name: "Supabase",
-                desc: "Database, authentication, and structured security event logging",
-                icon: (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <ellipse cx="12" cy="5" rx="9" ry="3" />
-                    <path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5" />
-                    <path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3" />
-                  </svg>
-                ),
-              },
-              {
-                name: "Arcjet",
-                desc: "WAF protections, basic bot controls, and rate limiting",
-                icon: (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                  </svg>
-                ),
-              },
-              {
-                name: "Vercel",
-                desc: "Hardened deployments, previews, and production-like environments",
-                icon: (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M2 20h20L12 4z" />
-                  </svg>
-                ),
-              },
-              {
-                name: "TypeScript",
-                desc: "Strict type safety across the full stack",
-                icon: (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="3" y="3" width="18" height="18" rx="2" />
-                    <path d="M12 8v8" />
-                    <path d="M8 12h8" />
-                  </svg>
-                ),
-              },
-              {
-                name: "Security Utils",
-                desc: "Injection detection, sanitisation, and logging",
-                icon: (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M12 16v-4" />
-                    <path d="M12 8h.01" />
-                  </svg>
-                ),
-              },
+              { name: "Next.js (App Router)", desc: "Modern, testable, security-first frontend" },
+              { name: "Supabase", desc: "Database, authentication, and structured security event logging" },
+              { name: "Arcjet", desc: "WAF protections, basic bot controls, and rate limiting" },
+              { name: "Vercel", desc: "Hardened deployments, previews, and production-like environments" },
+              { name: "TypeScript", desc: "Strict type safety across the full stack" },
+              { name: "Security Utils", desc: "Injection detection, sanitisation, and logging" },
             ].map((item) => (
               <div
                 key={item.name}
                 style={{
                   display: "flex",
-                  alignItems: "center",
-                  gap: 12,
-                  padding: "14px 16px",
+                  flexDirection: "column",
+                  gap: 4,
+                  padding: "16px 18px",
                   borderRadius: 12,
                   background: "var(--bg-card)",
-                  border: "1px solid rgba(30,41,59,0.5)",
+                  border: "1px solid var(--border)",
                 }}
               >
-                <span style={{ color: "var(--fg-muted)", flexShrink: 0 }}>{item.icon}</span>
-                <div>
-                  <p style={{ margin: 0, fontWeight: 600, fontSize: 14 }}>{item.name}</p>
-                  <p style={{ margin: 0, color: "var(--fg-muted)", fontSize: 12 }}>{item.desc}</p>
-                </div>
+                <p style={{ margin: 0, fontWeight: 600, fontSize: 14, color: "var(--fg)" }}>{item.name}</p>
+                <p style={{ margin: 0, color: "var(--fg-muted)", fontSize: 12 }}>{item.desc}</p>
               </div>
             ))}
           </div>
-        </section>
-
-        {/* Team */}
-        <section style={{ marginBottom: 32 }}>
-          <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 10 }}>{"Team mission & collaboration"}</h2>
-          <p style={{ color: "var(--fg-muted)", fontSize: 14, lineHeight: 1.7, marginBottom: 8 }}>
-            Our mission is to design and deploy intelligent digital systems that are secure,
-            resilient, and production-ready. We believe modern web applications must be built
-            with security as a continuous lifecycle, supported by collaborative development,
-            real-world testing, and measurable improvement.
-          </p>
-          <p style={{ color: "var(--fg-muted)", fontSize: 14, lineHeight: 1.7 }}>
-            Through structured teamwork and cloud-based deployment, we transform concepts into
-            defensible, operational systems that reflect professional engineering standards.
-          </p>
-        </section>
-
-        {/* CTA */}
-        <section style={{ marginBottom: 16 }}>
-          <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 10 }}>Use this live lab as your case study</h2>
-          <p style={{ color: "var(--fg-muted)", fontSize: 14, lineHeight: 1.7 }}>
-            Share this site with recruiters, hiring managers, and mentors. It is a deployable,
-            auditable cyber lab that demonstrates how you design, test, and improve defences —
-            not just theory on a CV, but a running system that can be safely attacked, defended,
-            and analysed.
-          </p>
         </section>
       </main>
 

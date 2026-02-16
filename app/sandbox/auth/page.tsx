@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import SiteHeader from "../../../components/site-header";
+import SiteFooter from "../../../components/site-footer";
 
 export default function AuthSandboxPage() {
   const [token, setToken] = useState("");
@@ -29,9 +30,10 @@ export default function AuthSandboxPage() {
   return (
     <div className="cyber-bg">
       <SiteHeader />
-      <main className="container-sm" style={{ paddingTop: 40, paddingBottom: 40 }}>
-        <h1 style={{ fontSize: 24, fontWeight: 700, marginBottom: 8 }}>{"Sandbox: Authentication & Access Control"}</h1>
-        <p style={{ color: "var(--fg-muted)", fontSize: 14, lineHeight: 1.7, marginBottom: 24 }}>
+      <main className="container-sm" style={{ paddingTop: 40, paddingBottom: 48 }}>
+        <p className="section-label">Sandbox</p>
+        <h1 className="section-title" style={{ fontSize: 24 }}>{"Authentication & Access Control"}</h1>
+        <p className="section-desc" style={{ marginBottom: 24 }}>
           Simulates an admin-only API at{" "}
           <code style={{ color: "var(--accent)", fontFamily: "var(--font-mono)", fontSize: 12 }}>/api/admin/secret</code>.
           Requests without the correct token are logged as{" "}
@@ -40,7 +42,7 @@ export default function AuthSandboxPage() {
         </p>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-          <label style={{ fontSize: 14 }}>
+          <label style={{ fontSize: 14, color: "var(--fg)" }}>
             Admin token (demo)
             <input
               type="text"
@@ -60,7 +62,7 @@ export default function AuthSandboxPage() {
 
         {result && (
           <div className="card" style={{ marginTop: 24 }}>
-            <p style={{ fontSize: 14 }}><strong>Status:</strong> {result.status}</p>
+            <p style={{ fontSize: 14, color: "var(--fg)" }}><strong>Status:</strong> {result.status}</p>
             <pre
               style={{
                 marginTop: 12,
@@ -71,6 +73,7 @@ export default function AuthSandboxPage() {
                 fontFamily: "var(--font-mono)",
                 overflowX: "auto",
                 border: "1px solid var(--border)",
+                color: "var(--fg-muted)",
               }}
             >
               {JSON.stringify(result.data, null, 2)}
@@ -84,6 +87,7 @@ export default function AuthSandboxPage() {
           (default value is a non-sensitive placeholder).
         </p>
       </main>
+      <SiteFooter />
     </div>
   );
 }

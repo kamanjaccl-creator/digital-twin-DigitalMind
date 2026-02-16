@@ -1,4 +1,111 @@
 "use client";
+import { useState, useRef, useEffect } from "react";
+
+function SandboxDropdown() {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    }
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, []);
+
+  const items = [
+    { href: "/sandbox/sql", label: "SQL Injection" },
+    { href: "/sandbox/xss", label: "XSS Testing" },
+    { href: "/sandbox/rate-limit", label: "Rate Limiting" },
+    { href: "/sandbox/auth", label: "Auth Testing" },
+  ];
+
+  return (
+    <div ref={ref} style={{ position: "relative" }}>
+      <button
+        onClick={() => setOpen(!open)}
+        style={{
+          background: "none",
+          border: "none",
+          color: "var(--fg-muted)",
+          cursor: "pointer",
+          fontSize: 13,
+          fontFamily: "inherit",
+          display: "flex",
+          alignItems: "center",
+          gap: 4,
+          padding: 0,
+        }}
+        onMouseEnter={(e) => (e.currentTarget.style.color = "var(--primary)")}
+        onMouseLeave={(e) => {
+          if (!open) e.currentTarget.style.color = "var(--fg-muted)";
+        }}
+      >
+        Sandbox
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          style={{
+            transition: "transform 0.2s",
+            transform: open ? "rotate(180deg)" : "rotate(0deg)",
+          }}
+        >
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </button>
+
+      {open && (
+        <div
+          style={{
+            position: "absolute",
+            top: "calc(100% + 8px)",
+            left: "50%",
+            transform: "translateX(-50%)",
+            background: "var(--bg-card)",
+            border: "1px solid var(--border)",
+            borderRadius: 10,
+            padding: "6px 0",
+            minWidth: 180,
+            boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
+            zIndex: 50,
+          }}
+        >
+          {items.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              onClick={() => setOpen(false)}
+              style={{
+                display: "block",
+                padding: "8px 16px",
+                fontSize: 13,
+                color: "var(--fg)",
+                textDecoration: "none",
+                transition: "background 0.15s",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "rgba(34,197,94,0.08)";
+                e.currentTarget.style.color = "var(--primary)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.color = "var(--fg)";
+              }}
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function Home() {
   return (
@@ -23,18 +130,15 @@ export default function Home() {
             paddingBottom: 14,
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <span className="glow-dot" />
-            <span style={{ fontWeight: 600, fontSize: 15 }}>Digital Twin III</span>
-          </div>
-          <nav style={{ display: "flex", gap: 16, fontSize: 13 }}>
+          <a href="/" style={{ fontWeight: 600, fontSize: 15, color: "var(--fg)", textDecoration: "none" }}>
+            Digital Twin III
+          </a>
+          <nav style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 13 }}>
             {[
               { href: "/#about", label: "About" },
-              { href: "/#sandbox", label: "Sandbox" },
               { href: "/#threats", label: "Threats" },
               { href: "/#stack", label: "Stack" },
               { href: "/lab", label: "Lab Case Study" },
-              { href: "/dashboard", label: "Dashboard" },
             ].map((l) => (
               <a
                 key={l.href}
@@ -46,6 +150,10 @@ export default function Home() {
                 {l.label}
               </a>
             ))}
+            <SandboxDropdown />
+            <a href="/dashboard" className="btn-primary" style={{ padding: "6px 16px", fontSize: 13 }}>
+              Dashboard
+            </a>
           </nav>
         </div>
       </header>
@@ -295,6 +403,141 @@ export default function Home() {
           </p>
         </section>
       </main>
+
+      {/* Footer */}
+      <footer style={{ borderTop: "1px solid var(--border)", background: "var(--bg-card)" }}>
+        <div
+          className="container"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr 1fr",
+            gap: 40,
+            paddingTop: 48,
+            paddingBottom: 40,
+          }}
+        >
+          {/* Left column - Brand */}
+          <div>
+            <p style={{ fontWeight: 700, fontSize: 16, marginBottom: 12 }}>Digital Twin III</p>
+            <p style={{ color: "var(--fg-muted)", fontSize: 13, lineHeight: 1.7, marginBottom: 16, maxWidth: 320 }}>
+              A cyber-hardened personal portfolio with integrated AI agents, real-time threat
+              detection, and security analytics. Built by the DigitalMind Team.
+            </p>
+            {/* Social icons */}
+            <div style={{ display: "flex", gap: 14 }}>
+              {/* GitHub */}
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub" style={{ color: "var(--fg-muted)" }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--fg)")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "var(--fg-muted)")}
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                </svg>
+              </a>
+              {/* LinkedIn */}
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" style={{ color: "var(--fg-muted)" }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--fg)")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "var(--fg-muted)")}
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                </svg>
+              </a>
+              {/* Email */}
+              <a href="mailto:contact@digitalmind.dev" aria-label="Email" style={{ color: "var(--fg-muted)" }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--fg)")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "var(--fg-muted)")}
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="4" width="20" height="16" rx="2" />
+                  <path d="M22 7l-10 7L2 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          {/* Project column */}
+          <div>
+            <p style={{ fontWeight: 600, fontSize: 14, marginBottom: 14 }}>Project</p>
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              {[
+                { href: "/#about", label: "About" },
+                { href: "/#sandbox", label: "Projects" },
+                { href: "/chat", label: "AI Agents" },
+                { href: "/#team", label: "Team" },
+              ].map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  style={{ color: "var(--fg-muted)", fontSize: 13, textDecoration: "none" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "var(--fg)")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "var(--fg-muted)")}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Security column */}
+          <div>
+            <p style={{ fontWeight: 600, fontSize: 14, marginBottom: 14 }}>Security</p>
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              {[
+                { href: "https://owasp.org/www-project-top-ten/", label: "OWASP", external: true },
+                { href: "/#about", label: "Security Policy" },
+                { href: "/#about", label: "Responsible Disclosure" },
+                { href: "/dashboard", label: "Audit Logs" },
+              ].map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target={link.external ? "_blank" : undefined}
+                  rel={link.external ? "noopener noreferrer" : undefined}
+                  style={{ color: "var(--fg-muted)", fontSize: 13, textDecoration: "none" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "var(--fg)")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "var(--fg-muted)")}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Copyright bar */}
+        <div
+          style={{
+            borderTop: "1px solid var(--border)",
+            padding: "16px 0",
+          }}
+        >
+          <div
+            className="container"
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              fontSize: 12,
+              color: "var(--fg-muted)",
+            }}
+          >
+            <span>{"© 2026 DigitalMind Team. All rights reserved."}</span>
+            <span style={{ display: "flex", alignItems: "center", gap: 6 }}>
+              <span
+                style={{
+                  width: 8,
+                  height: 8,
+                  borderRadius: "50%",
+                  background: "var(--primary)",
+                  display: "inline-block",
+                }}
+              />
+              All systems operational
+            </span>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

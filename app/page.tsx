@@ -130,7 +130,8 @@ export default function Home() {
             paddingBottom: 14,
           }}
         >
-          <a href="/" style={{ fontWeight: 600, fontSize: 15, color: "var(--fg)", textDecoration: "none" }}>
+          <a href="/" style={{ fontWeight: 600, fontSize: 15, color: "var(--fg)", textDecoration: "none", display: "flex", alignItems: "center", gap: 8 }}>
+            <span style={{ width: 10, height: 10, borderRadius: "50%", background: "var(--primary)", boxShadow: "0 0 8px var(--primary), 0 0 20px rgba(34,197,94,0.3)", display: "inline-block" }} />
             Digital Twin III
           </a>
           <nav style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 13 }}>
@@ -151,7 +152,37 @@ export default function Home() {
               </a>
             ))}
             <SandboxDropdown />
-            <a href="/dashboard" className="btn-primary" style={{ padding: "6px 16px", fontSize: 13 }}>
+            <a
+              href="/dashboard"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 8,
+                padding: "8px 20px",
+                fontSize: 13,
+                fontWeight: 600,
+                color: "var(--primary)",
+                border: "2px solid var(--primary)",
+                borderRadius: 999,
+                background: "transparent",
+                textDecoration: "none",
+                transition: "background 0.2s, color 0.2s",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "var(--primary)";
+                e.currentTarget.style.color = "#000";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.color = "var(--primary)";
+              }}
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <rect x="1" y="1" width="6" height="6" rx="1" />
+                <rect x="9" y="1" width="6" height="6" rx="1" />
+                <rect x="1" y="9" width="6" height="6" rx="1" />
+                <rect x="9" y="9" width="6" height="6" rx="1" />
+              </svg>
               Dashboard
             </a>
           </nav>
@@ -186,43 +217,87 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Right card */}
+          {/* Right card - DIGITALMIND TEAM Status */}
           <div
             style={{
-              flexBasis: 290,
+              flexBasis: 310,
               flexGrow: 0,
               flexShrink: 0,
               borderRadius: 20,
-              padding: 18,
-              background: "radial-gradient(circle at top, rgba(56,189,248,0.25), transparent 60%), var(--bg-card)",
+              padding: 24,
+              background: "radial-gradient(ellipse at top, rgba(56,189,248,0.12), transparent 60%), var(--bg-card)",
               border: "1px solid rgba(30,41,59,0.5)",
               display: "flex",
               flexDirection: "column",
-              gap: 14,
+              gap: 18,
             }}
           >
+            {/* Header */}
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <div>
-                <p style={{ fontSize: 11, color: "var(--accent)", margin: 0 }}>Live Lab</p>
-                <p style={{ fontSize: 14, fontWeight: 600, margin: 0 }}>Attack surface summary</p>
-              </div>
-              <span className="badge badge-online">Online</span>
+              <span style={{ fontSize: 12, fontWeight: 600, letterSpacing: 1.5, textTransform: "uppercase", color: "var(--fg-muted)" }}>
+                DIGITALMIND TEAM
+              </span>
+              <span
+                style={{
+                  fontSize: 11,
+                  fontWeight: 600,
+                  color: "var(--primary)",
+                  border: "1px solid var(--primary)",
+                  borderRadius: 999,
+                  padding: "3px 12px",
+                }}
+              >
+                Online
+              </span>
             </div>
-            <div style={{ borderRadius: 14, background: "rgba(11,18,37,0.9)", padding: 14, fontSize: 13 }}>
-              <ul style={{ margin: 0, paddingLeft: 18 }}>
-                <li>Target SQL injection, XSS, and auth flows in safe sandboxes.</li>
-                <li style={{ marginTop: 4 }}>Every attempt is logged into the Supabase-backed security dashboard.</li>
-                <li style={{ marginTop: 4 }}>Use your own testing tools and payloads — this lab is built to be attacked.</li>
-              </ul>
-            </div>
-            <a
-              href="/dashboard"
-              className="btn-outline"
-              style={{ marginTop: "auto", display: "flex", justifyContent: "space-between", fontSize: 12 }}
+
+            {/* Status rows */}
+            <div
+              style={{
+                borderRadius: 14,
+                border: "1px solid rgba(30,41,59,0.6)",
+                background: "rgba(8,14,30,0.7)",
+                padding: "4px 0",
+              }}
             >
-              <span>Open security dashboard</span>
-              <span>{">"}</span>
-            </a>
+              {[
+                { label: "STATUS", value: "OPERATIONAL", color: "var(--primary)" },
+                { label: "ACCESS LEVEL", value: "PUBLIC", color: "var(--fg)" },
+                { label: "THREAT DETECTION", value: "ACTIVE", color: "var(--primary)" },
+              ].map((row, i, arr) => (
+                <div
+                  key={row.label}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    padding: "12px 18px",
+                    borderBottom: i < arr.length - 1 ? "1px solid rgba(30,41,59,0.4)" : "none",
+                    fontSize: 13,
+                  }}
+                >
+                  <span style={{ color: "var(--fg-muted)", fontWeight: 500 }}>{row.label}</span>
+                  <span style={{ fontWeight: 700, color: row.color }}>{row.value}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* WAF badge */}
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <span
+                style={{
+                  fontSize: 12,
+                  fontWeight: 500,
+                  color: "var(--fg-muted)",
+                  border: "1px solid rgba(30,41,59,0.6)",
+                  borderRadius: 999,
+                  padding: "6px 18px",
+                  background: "rgba(8,14,30,0.5)",
+                }}
+              >
+                WAF Protection ENABLED
+              </span>
+            </div>
           </div>
         </section>
 
@@ -261,25 +336,112 @@ export default function Home() {
 
         {/* Sandbox */}
         <section id="sandbox" style={{ marginBottom: 32, scrollMarginTop: 80 }}>
-          <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 10 }}>Hacking simulation sandbox</h2>
-          <p style={{ color: "var(--fg-muted)", fontSize: 14, lineHeight: 1.7 }}>
-            These live sandboxes are wired to real detection, logging, and rate limiting. You can
-            safely try common attacks and then open the dashboard to observe how the system
-            classified and handled your traffic.
+          <p style={{ fontSize: 11, letterSpacing: 2, color: "var(--accent)", textTransform: "uppercase", marginBottom: 6 }}>
+            ATTACK SURFACE SUMMARY
           </p>
-          <ul style={{ fontSize: 14, marginTop: 14, listStyle: "none", padding: 0, display: "flex", flexDirection: "column", gap: 8 }}>
+          <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 10 }}>Hacking simulation sandbox</h2>
+          <p style={{ color: "var(--fg-muted)", fontSize: 14, lineHeight: 1.7, marginBottom: 6 }}>
+            Target SQL injection, XSS, and auth flows in safe sandboxes.
+            Every attempt is logged into the Supabase-backed security dashboard.
+            Use your own testing tools and payloads — this lab is built to be attacked.
+          </p>
+          <a
+            href="/dashboard"
+            style={{
+              color: "var(--primary)",
+              fontSize: 14,
+              textDecoration: "none",
+              fontWeight: 500,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 4,
+              marginBottom: 20,
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.textDecoration = "underline")}
+            onMouseLeave={(e) => (e.currentTarget.style.textDecoration = "none")}
+          >
+            {"Open security dashboard >"}
+          </a>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+              gap: 12,
+            }}
+          >
             {[
-              { href: "/sandbox/sql", label: "/sandbox/sql", desc: " — SQL injection payloads, detection, and safe query patterns." },
-              { href: "/sandbox/xss", label: "/sandbox/xss", desc: " — reflected XSS attempts, output encoding, and malicious payload detection." },
-              { href: "/sandbox/rate-limit", label: "/sandbox/rate-limit", desc: " — automated/bot-style traffic, scanners, and basic WAF-style rate limiting." },
-              { href: "/sandbox/auth", label: "/sandbox/auth", desc: " — authentication failures, broken access control, and privilege-abuse scenarios." },
+              {
+                href: "/sandbox/sql",
+                title: "SQL Injection",
+                desc: "SQL injection payloads, detection, and safe query patterns.",
+                icon: (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <ellipse cx="12" cy="5" rx="9" ry="3" />
+                    <path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5" />
+                    <path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3" />
+                  </svg>
+                ),
+              },
+              {
+                href: "/sandbox/xss",
+                title: "XSS Testing",
+                desc: "Reflected XSS attempts, output encoding, and malicious payload detection.",
+                icon: (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="16 18 22 12 16 6" />
+                    <polyline points="8 6 2 12 8 18" />
+                  </svg>
+                ),
+              },
+              {
+                href: "/sandbox/rate-limit",
+                title: "Rate Limiting",
+                desc: "Automated/bot-style traffic, scanners, and basic WAF-style rate limiting.",
+                icon: (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg>
+                ),
+              },
+              {
+                href: "/sandbox/auth",
+                title: "Auth Testing",
+                desc: "Authentication failures, broken access control, and privilege-abuse scenarios.",
+                icon: (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                    <path d="M7 11V7a5 5 0 0110 0v4" />
+                  </svg>
+                ),
+              },
             ].map((s) => (
-              <li key={s.href}>
-                <a href={s.href} style={{ color: "var(--accent)" }}>{s.label}</a>
-                <span style={{ color: "var(--fg-muted)" }}>{s.desc}</span>
-              </li>
+              <a
+                key={s.href}
+                href={s.href}
+                style={{
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: 12,
+                  padding: "16px",
+                  borderRadius: 12,
+                  background: "var(--bg-card)",
+                  border: "1px solid rgba(30,41,59,0.5)",
+                  textDecoration: "none",
+                  color: "var(--fg)",
+                  transition: "border-color 0.2s",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.borderColor = "rgba(34,197,94,0.4)")}
+                onMouseLeave={(e) => (e.currentTarget.style.borderColor = "rgba(30,41,59,0.5)")}
+              >
+                <span style={{ color: "var(--primary)", flexShrink: 0, marginTop: 2 }}>{s.icon}</span>
+                <div>
+                  <p style={{ margin: 0, fontWeight: 600, fontSize: 14 }}>{s.title}</p>
+                  <p style={{ margin: "4px 0 0", color: "var(--fg-muted)", fontSize: 12, lineHeight: 1.5 }}>{s.desc}</p>
+                </div>
+              </a>
             ))}
-          </ul>
+          </div>
         </section>
 
         {/* Stack */}

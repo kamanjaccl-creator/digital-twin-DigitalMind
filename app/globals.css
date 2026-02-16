@@ -404,12 +404,11 @@ a:hover {
   gap: 12px;
   margin-top: 4px;
 }
-.footer-social-link {
+.footer-social-icon {
   color: var(--fg-muted);
-  transition: color 0.15s;
-}
-.footer-social-link:hover {
-  color: var(--fg);
+  display: inline-flex;
+  cursor: default;
+  user-select: none;
 }
 .footer-link-col {
   display: flex;

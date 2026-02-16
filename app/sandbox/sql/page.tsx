@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import SiteHeader from "../../../components/site-header";
 
 interface Result {
   isThreat: boolean;
@@ -42,8 +43,8 @@ export default function SandboxSQL() {
 
   return (
     <div className="cyber-bg">
+      <SiteHeader />
       <main className="container-sm" style={{ paddingTop: 40, paddingBottom: 40 }}>
-        <a href="/sandbox" style={{ fontSize: 13, display: "inline-block", marginBottom: 16 }}>{"<- Back to sandbox"}</a>
         <h1 style={{ fontSize: 24, fontWeight: 700, marginBottom: 8 }}>Sandbox: SQL Injection</h1>
         <p style={{ color: "var(--fg-muted)", fontSize: 14, lineHeight: 1.7, marginBottom: 24 }}>
           Try common SQL payloads. The backend runs detection, logs events, and shows whether the input would be blocked.

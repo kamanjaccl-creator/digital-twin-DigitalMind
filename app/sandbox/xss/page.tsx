@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import SiteHeader from "../../../components/site-header";
 
 export default function SandboxXSS() {
   const [input, setInput] = useState("");
@@ -34,8 +35,8 @@ export default function SandboxXSS() {
 
   return (
     <div className="cyber-bg">
+      <SiteHeader />
       <main className="container-sm" style={{ paddingTop: 40, paddingBottom: 40 }}>
-        <a href="/sandbox" style={{ fontSize: 13, display: "inline-block", marginBottom: 16 }}>{"<- Back to sandbox"}</a>
         <h1 style={{ fontSize: 24, fontWeight: 700, marginBottom: 8 }}>{"Sandbox: Cross-Site Scripting (XSS)"}</h1>
         <p style={{ color: "var(--fg-muted)", fontSize: 14, lineHeight: 1.7, marginBottom: 24 }}>
           Enter HTML/JS snippets. The API will analyze them for XSS / malicious payload patterns and log attempts.

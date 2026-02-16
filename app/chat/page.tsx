@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type KeyboardEvent } from "react";
+import SiteHeader from "../../components/site-header";
 
 interface ChatMessage {
   role: "user" | "assistant";
@@ -48,7 +49,9 @@ export default function ChatPage() {
   };
 
   return (
-    <div className="cyber-bg" style={{ display: "flex", justifyContent: "center", padding: "40px 16px" }}>
+    <div className="cyber-bg" style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+      <SiteHeader />
+      <div style={{ display: "flex", justifyContent: "center", padding: "40px 16px", flex: 1 }}>
       <div
         style={{
           width: "100%",
@@ -125,6 +128,7 @@ export default function ChatPage() {
             </button>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

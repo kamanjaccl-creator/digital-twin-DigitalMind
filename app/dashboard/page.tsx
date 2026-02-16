@@ -1,3 +1,4 @@
+import SiteHeader from "../../components/site-header";
 import { getSupabaseServer } from "../../lib/supabase-server";
 
 interface SecurityEventRow {
@@ -30,6 +31,7 @@ export default async function DashboardPage() {
   if (!supabase) {
     return (
       <div className="cyber-bg">
+        <SiteHeader />
         <main className="container-md" style={{ paddingTop: 40, paddingBottom: 40 }}>
           <h1 style={{ fontSize: 24, fontWeight: 700, marginBottom: 16 }}>Security Dashboard</h1>
           <p style={{ color: "var(--fg-muted)", fontSize: 14 }}>
@@ -73,14 +75,12 @@ export default async function DashboardPage() {
 
   return (
     <div className="cyber-bg">
+      <SiteHeader />
       <main className="container" style={{ paddingTop: 32, paddingBottom: 40 }}>
-        <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
-          <div>
-            <p style={{ fontSize: 11, letterSpacing: 2, textTransform: "uppercase", color: "var(--accent)" }}>Digital Twin III</p>
-            <h1 style={{ fontSize: 24, fontWeight: 700, marginTop: 4, marginBottom: 4 }}>Security Dashboard</h1>
-            <p style={{ fontSize: 13, color: "var(--fg-muted)" }}>Real-time security telemetry from your live cyber lab (last 24h).</p>
-          </div>
-          <a href="/" className="btn-outline">{"<- Back to site"}</a>
+        <header style={{ marginBottom: 24 }}>
+          <p style={{ fontSize: 11, letterSpacing: 2, textTransform: "uppercase", color: "var(--accent)" }}>Digital Twin III</p>
+          <h1 style={{ fontSize: 24, fontWeight: 700, marginTop: 4, marginBottom: 4 }}>Security Dashboard</h1>
+          <p style={{ fontSize: 13, color: "var(--fg-muted)" }}>Real-time security telemetry from your live cyber lab (last 24h).</p>
         </header>
 
         {/* Overview cards */}

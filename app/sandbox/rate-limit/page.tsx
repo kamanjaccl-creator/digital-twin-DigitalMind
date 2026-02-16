@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import SiteHeader from "../../../components/site-header";
 
 interface BurstResult {
   lastStatus: number | null;
@@ -37,8 +38,8 @@ export default function SandboxRateLimit() {
 
   return (
     <div className="cyber-bg">
+      <SiteHeader />
       <main className="container-sm" style={{ paddingTop: 40, paddingBottom: 40 }}>
-        <a href="/sandbox" style={{ fontSize: 13, display: "inline-block", marginBottom: 16 }}>{"<- Back to sandbox"}</a>
         <h1 style={{ fontSize: 24, fontWeight: 700, marginBottom: 8 }}>Sandbox: Automated / Bot Traffic</h1>
         <p style={{ color: "var(--fg-muted)", fontSize: 14, lineHeight: 1.7, marginBottom: 24 }}>
           Sends a burst of requests to{" "}

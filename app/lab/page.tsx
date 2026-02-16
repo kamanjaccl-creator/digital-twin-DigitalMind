@@ -1,10 +1,10 @@
+import SiteHeader from "../../components/site-header";
+
 export default function LiveCyberLabPage() {
   return (
     <div className="cyber-bg">
+      <SiteHeader />
       <main className="container-md" style={{ paddingTop: 40, paddingBottom: 40 }}>
-        <a href="/" style={{ fontSize: 13, display: "inline-block", marginBottom: 16 }}>
-          {"<- Back to site"}
-        </a>
         <h1 style={{ fontSize: 24, fontWeight: 700, marginBottom: 16 }}>
           Digital Twin III — Cyber-Hardened Portfolio
         </h1>

@@ -1,54 +1,11 @@
 "use client";
 
+import SiteHeader from "../components/site-header";
+
 export default function Home() {
   return (
     <div className="cyber-bg">
-      {/* Header */}
-      <header
-        style={{
-          borderBottom: "1px solid rgba(30,41,59,0.5)",
-          backdropFilter: "blur(12px)",
-          position: "sticky",
-          top: 0,
-          zIndex: 10,
-        }}
-      >
-        <div
-          className="container"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            paddingTop: 14,
-            paddingBottom: 14,
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <span className="glow-dot" />
-            <span style={{ fontWeight: 600, fontSize: 15 }}>Digital Twin III</span>
-          </div>
-          <nav style={{ display: "flex", gap: 16, fontSize: 13 }}>
-            {[
-              { href: "/#about", label: "About" },
-              { href: "/#sandbox", label: "Sandbox" },
-              { href: "/#threats", label: "Threats" },
-              { href: "/#stack", label: "Stack" },
-              { href: "/lab", label: "Lab Case Study" },
-              { href: "/dashboard", label: "Dashboard" },
-            ].map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                style={{ color: "var(--fg-muted)", textDecoration: "none" }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--primary)")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "var(--fg-muted)")}
-              >
-                {l.label}
-              </a>
-            ))}
-          </nav>
-        </div>
-      </header>
+      <SiteHeader />
 
       <main className="container" style={{ paddingTop: 32, paddingBottom: 40 }}>
         {/* Hero */}

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import SiteHeader from "../../../components/site-header";
 
 export default function AuthSandboxPage() {
   const [token, setToken] = useState("");
@@ -27,8 +28,8 @@ export default function AuthSandboxPage() {
 
   return (
     <div className="cyber-bg">
+      <SiteHeader />
       <main className="container-sm" style={{ paddingTop: 40, paddingBottom: 40 }}>
-        <a href="/sandbox" style={{ fontSize: 13, display: "inline-block", marginBottom: 16 }}>{"<- Back to sandbox"}</a>
         <h1 style={{ fontSize: 24, fontWeight: 700, marginBottom: 8 }}>{"Sandbox: Authentication & Access Control"}</h1>
         <p style={{ color: "var(--fg-muted)", fontSize: 14, lineHeight: 1.7, marginBottom: 24 }}>
           Simulates an admin-only API at{" "}

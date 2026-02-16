@@ -201,37 +201,34 @@ export default function Home() {
               flexGrow: 0,
               flexShrink: 0,
               borderRadius: 20,
-              padding: 20,
-              background: "radial-gradient(circle at top, rgba(56,189,248,0.2), transparent 60%), var(--bg-card)",
+              padding: 22,
+              background: "radial-gradient(circle at 50% 0%, rgba(56,189,248,0.15), transparent 55%), var(--bg-card)",
               border: "1px solid var(--border)",
               display: "flex",
               flexDirection: "column",
-              gap: 14,
+              gap: 16,
             }}
           >
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <div>
-                <p style={{ fontSize: 11, color: "var(--fg-muted)", margin: 0 }}>DIGITALMIND TEAM</p>
-                <span className="badge badge-online" style={{ marginTop: 4, display: "inline-block" }}>Online</span>
-              </div>
+            <div>
+              <p style={{ fontSize: 11, letterSpacing: 1, color: "var(--fg-muted)", margin: 0 }}>DIGITALMIND TEAM</p>
+              <span className="badge badge-online" style={{ marginTop: 6, display: "inline-block" }}>Online</span>
             </div>
-            <div style={{ borderRadius: 14, background: "rgba(11,18,37,0.9)", padding: 14, fontSize: 13 }}>
-              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
+            <div style={{ borderRadius: 14, background: "rgba(5,10,24,0.85)", border: "1px solid var(--border)", padding: "14px 16px", fontSize: 13 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", paddingBottom: 10, borderBottom: "1px solid var(--border)" }}>
                 <span style={{ color: "var(--fg-muted)" }}>STATUS</span>
                 <span style={{ color: "var(--primary)", fontWeight: 600 }}>OPERATIONAL</span>
               </div>
-              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", padding: "10px 0", borderBottom: "1px solid var(--border)" }}>
                 <span style={{ color: "var(--fg-muted)" }}>ACCESS LEVEL</span>
-                <span style={{ color: "var(--fg)", fontWeight: 600 }}>PUBLIC</span>
+                <span style={{ color: "var(--fg)", fontWeight: 700 }}>PUBLIC</span>
               </div>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", paddingTop: 10 }}>
                 <span style={{ color: "var(--fg-muted)" }}>THREAT DETECTION</span>
                 <span style={{ color: "var(--primary)", fontWeight: 600 }}>ACTIVE</span>
               </div>
             </div>
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap", fontSize: 11 }}>
               <span className="tech-badge">WAF Protection ENABLED</span>
-              <span className="tech-badge">AI Agents 5 ONLINE</span>
             </div>
           </div>
         </section>

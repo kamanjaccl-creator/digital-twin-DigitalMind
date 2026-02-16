@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import SiteHeader from "../../../components/site-header";
+import SiteFooter from "../../../components/site-footer";
 
 interface Result {
   isThreat: boolean;
@@ -42,15 +44,15 @@ export default function SandboxSQL() {
 
   return (
     <div className="cyber-bg">
+      <SiteHeader />
       <main className="container-sm" style={{ paddingTop: 40, paddingBottom: 40 }}>
-        <a href="/sandbox" style={{ fontSize: 13, display: "inline-block", marginBottom: 16 }}>{"<- Back to sandbox"}</a>
-        <h1 style={{ fontSize: 24, fontWeight: 700, marginBottom: 8 }}>Sandbox: SQL Injection</h1>
-        <p style={{ color: "var(--fg-muted)", fontSize: 14, lineHeight: 1.7, marginBottom: 24 }}>
+        <h1 style={{ fontSize: 22, fontWeight: 700, marginBottom: 10 }}>SQL Injection Sandbox</h1>
+        <p style={{ color: "var(--fg-muted)", fontSize: 14, lineHeight: 1.7, marginBottom: 20 }}>
           Try common SQL payloads. The backend runs detection, logs events, and shows whether the input would be blocked.
         </p>
 
         <form onSubmit={onSubmit} style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-          <label style={{ fontSize: 14 }}>
+          <label style={{ fontSize: 14, color: "var(--fg)" }}>
             Test input
             <input name="payload" type="text" placeholder="e.g., ' OR 1=1 --" className="input" style={{ marginTop: 6 }} />
           </label>
@@ -66,7 +68,7 @@ export default function SandboxSQL() {
 
         {result && (
           <div className={result.isThreat ? "result-threat" : "result-safe"} style={{ marginTop: 24 }}>
-            <p style={{ fontSize: 14, fontWeight: 600, margin: 0 }}>
+            <p style={{ fontSize: 14, fontWeight: 600, margin: 0, color: "var(--fg)" }}>
               {result.isThreat ? "Potential SQL injection detected" : "No obvious SQL injection detected"}
             </p>
             <p style={{ fontSize: 14, color: "var(--fg-muted)", marginTop: 6 }}>{result.message}</p>
@@ -79,6 +81,7 @@ export default function SandboxSQL() {
           </div>
         )}
       </main>
+      <SiteFooter />
     </div>
   );
 }
